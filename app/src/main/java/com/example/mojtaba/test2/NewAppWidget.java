@@ -38,7 +38,7 @@ public class NewAppWidget extends AppWidgetProvider {
 			this.context = context;
 			this.appWidgetManager = appWidgetManager;
 			this.appWidgetId = appWidgetId;
-			title="init";
+			title="loading ...";
 		}
  
 		@Override
@@ -51,7 +51,8 @@ public class NewAppWidget extends AppWidgetProvider {
 				Document document = Jsoup.connect("http://www.tgju.org/coin").get();
 				Elements a = document.body().select("*");;
 				//Elements value = a.select("body").select("main").select("div").select("table").select("tbody").select("th");
-				title = a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
+				title="سکه امامی:";
+				title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
 			} catch (IOException e) {
 				e.printStackTrace();
 				title="error";
@@ -61,11 +62,10 @@ public class NewAppWidget extends AppWidgetProvider {
  
 		@Override
 		protected void onPostExecute(Void result) {
-			// Set title into TextView
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+
 			views.setTextViewText(R.id.appwidget_text, title);
 			appWidgetManager.updateAppWidget(appWidgetId, views);
-			//updateAppWidget(context, appWidgetManager, appWidgetId);
 		}
 	}
 
