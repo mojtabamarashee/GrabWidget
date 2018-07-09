@@ -98,12 +98,15 @@ public class NewAppWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
 
+		for (final int appWidgetId : appWidgetIds) {
+			new Title(context, appWidgetManager, appWidgetId).execute();
+		}
 		final Handler handler = new Handler();
 		final Runnable r = new Runnable() {
 			public void run() {
 				for (final int appWidgetId : appWidgetIds) {
 					new Title(context, appWidgetManager, appWidgetId).execute();
-					handler.postDelayed(this, 5 * 60 * 1000);
+					handler.postDelayed(this, 1 * 60 * 1000);
 				}
 			}
 		};
