@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import java.util.Calendar;
-import java.io.IOException;
+import java.io.Exception;
 import android.os.Handler;
 import java.text.SimpleDateFormat;
 import org.jsoup.Jsoup;
@@ -50,7 +50,7 @@ public class NewAppWidget extends AppWidgetProvider {
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
-				Document document = Jsoup.connect("http://www.tgju.org/coin").get();
+				Document document = Jsoup.connect("http://www.tgju.org/coin").timeout(5*1000).get();
 				Elements a = document.body().select("*");
 				//Elements value = a.select("body").select("main").select("div").select("table").select("tbody").select("th");
 				title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
@@ -68,8 +68,8 @@ public class NewAppWidget extends AppWidgetProvider {
 				title += Integer.toString(cntr);
 				cntr = cntr + 1;
 
-			} catch (IOException e) {
-				title="error" + e.getMessage();
+			} catch (Exception e) {
+				title="error : " + e.getMessage();
 			}
 			return null;
 		}
@@ -106,7 +106,7 @@ public class NewAppWidget extends AppWidgetProvider {
 			public void run() {
 				for (final int appWidgetId : appWidgetIds) {
 					new Title(context, appWidgetManager, appWidgetId).execute();
-					handler.postDelayed(this, 1 * 60 * 1000);
+					handler.postDelayed(this, 1 * 30 * 1000);
 				}
 			}
 		};
