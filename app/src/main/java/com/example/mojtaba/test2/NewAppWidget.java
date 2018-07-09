@@ -8,9 +8,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
-
+import java.util.Calendar;
 import java.io.IOException;
-
+import android.os.Handler;
+import java.text.SimpleDateFormat;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,6 +29,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
 
 	static String title;
+	int cntr = 0;
 
 	private class Title extends AsyncTask<Void, Void, Void> {
 		private Context context;
@@ -49,13 +51,25 @@ public class NewAppWidget extends AppWidgetProvider {
 		protected Void doInBackground(Void... params) {
 			try {
 				Document document = Jsoup.connect("http://www.tgju.org/coin").get();
-				Elements a = document.body().select("*");;
+				Elements a = document.body().select("*");
 				//Elements value = a.select("body").select("main").select("div").select("table").select("tbody").select("th");
-				title="سکه امامی:";
+				title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
+				title += ":";
 				title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
+				title += "\n";
+
+				Calendar c = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String strDate = sdf.format(c.getTime());
+
+				title += strDate;
+
+				title += "\n";
+				title += Integer.toString(cntr);
+				cntr = cntr + 1;
+
 			} catch (IOException e) {
-				e.printStackTrace();
-				title="error";
+				title="error" + e.getMessage();
 			}
 			return null;
 		}
@@ -82,12 +96,19 @@ public class NewAppWidget extends AppWidgetProvider {
 
 
     @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
-        for (int appWidgetId : appWidgetIds) {
-            //updateAppWidget(context, appWidgetManager, appWidgetId);
-			new Title(context, appWidgetManager, appWidgetId).execute();
-        }
+    public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
+
+		final Handler handler = new Handler();
+		final Runnable r = new Runnable() {
+			public void run() {
+				for (final int appWidgetId : appWidgetIds) {
+					new Title(context, appWidgetManager, appWidgetId).execute();
+					handler.postDelayed(this, 5 * 60 * 1000);
+				}
+			}
+		};
+
+		handler.postDelayed(r, 5);
     }
 
     @Override
