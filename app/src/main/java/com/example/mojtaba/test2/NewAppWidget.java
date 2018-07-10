@@ -15,8 +15,23 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.RemoteViews;
+import android.widget.Toast;
+ 
+
+
+
+
+
 
 /**
  * Implementation of App Widget functionality.
@@ -92,26 +107,43 @@ public class NewAppWidget extends AppWidgetProvider {
 
     }
 
+	public void onEnabled(Context context) {
+		super.onEnabled(context);
+		AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+		Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+		PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+		//After after 3 seconds
+		am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 1000 * 5, 1000 , pi);
+		Toast.makeText(context, "onAppWidgetOptionsChanged() called", Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
+			int[] appWidgetIds) {
+		//ComponentName thisWidget = new ComponentName(context,
+		//		TimeWidgetProvider.class);
+
+		//for (int widgetId : appWidgetManager.getAppWidgetIds(thisWidget)) {
+			for (int appWidgetId : appWidgetIds) {
+
+			//Get the remote views
+			//RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
+					//R.layout.time_widget_layout);
+			// Set the text with the current time.
+			//remoteViews.setTextViewText(R.id.tvTime, Utility.getCurrentTime("hh:mm:ss a"));
+			//appWidgetManager.updateAppWidget(widgetId, remoteViews);
 
 
-    @Override
-    public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
 
-		for (final int appWidgetId : appWidgetIds) {
-			new Title(context, appWidgetManager, appWidgetId).execute();
+
+			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+			views.setTextViewText(R.id.appwidget_text, title);
+			appWidgetManager.updateAppWidget(appWidgetId, views);
+
+
 		}
-		final Handler handler = new Handler();
-		final Runnable r = new Runnable() {
-			public void run() {
-				for (final int appWidgetId : appWidgetIds) {
-					new Title(context, appWidgetManager, appWidgetId).execute();
-					handler.postDelayed(this, 1 * 10 * 1000);
-				}
-			}
-		};
-
-		handler.postDelayed(r, 5);
-    }
+	}
+ 
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
@@ -121,18 +153,12 @@ public class NewAppWidget extends AppWidgetProvider {
         }
     }
 
-    @Override
-    public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
-    }
 
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
     }
 }
-
-
 
 
 
