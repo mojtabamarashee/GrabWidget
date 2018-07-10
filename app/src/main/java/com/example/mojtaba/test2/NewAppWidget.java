@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import java.util.Calendar;
-import java.io.Exception;
 import android.os.Handler;
 import java.text.SimpleDateFormat;
 import org.jsoup.Jsoup;
@@ -106,7 +105,7 @@ public class NewAppWidget extends AppWidgetProvider {
 			public void run() {
 				for (final int appWidgetId : appWidgetIds) {
 					new Title(context, appWidgetManager, appWidgetId).execute();
-					handler.postDelayed(this, 1 * 30 * 1000);
+					handler.postDelayed(this, 1 * 10 * 1000);
 				}
 			}
 		};
