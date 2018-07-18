@@ -35,7 +35,6 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
         public Title(Context context)
         {
-            this.context = context;
             title="loading ...";
         }
 
@@ -44,7 +43,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground() {
             try {
                 WriteToFile("in Runnable before jsoup");
                 Document document = Jsoup.connect("http://www.tgju.org/coin").get();
@@ -77,6 +76,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
         @Override
         protected void onPostExecute(Void result) {
+			Context context = NewAppWidget.getAppContext();
 			WriteToFile("at start of postExecute");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
             views.setTextViewText(R.id.appwidget_text, title);
@@ -95,25 +95,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    int cntr = 0;
+	int cntr = 0;
  @Override
  public void onReceive(final Context context, Intent intent) {
   PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
@@ -126,55 +108,35 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
   final RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
           R.layout.new_app_widget);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
      final RemoteViews rm = remoteViews;
      final Context contextt = context;
      final Handler handler = new Handler();
      Runnable r = new Runnable() {
+		 @Override
+		 public void run() {
+			 String title = "loading";
+			 try{
+				 final Title titleTask = new Title();
+				 titleTask.execute();
+				 handler.postDelayed(this, 1 * 60 * 1000);
+			 }
+			 catch(Exception e)
+			 {
+				 WriteToFile("run Exeption");
+				 title="error : " + e.getMessage()+ "title : "  + title;
+			 }
+			 //rm.setTextViewText(R.id.appwidget_text, Utility.getCurrentTime("hh:mm:ss a"));
+			 handler.postDelayed(this, 1 * 60 * 1000);
 
-   @Override
-   public void run() {
-       String title = "loading";
-    try{
+		 }
+	 };
+	 handler.post(r);
 
-        new Title(contextt).execute();
-        handler.postDelayed(this, 1 * 60 * 1000);
-        //}
-    }
-    catch(Exception e)
-    {
-        //WriteToFile("run Exeption");
-        title="error : " + e.getMessage()+ "title :"  + title;
-    }
-       //rm.setTextViewText(R.id.appwidget_text, Utility.getCurrentTime("hh:mm:ss a"));
-
-
-
-       handler.postDelayed(this, 1 * 60 * 1000);
-   }
-  };
-  handler.post(r);
-
-
-
-
-  //remoteViews.setTextViewText(R.id.appwidget_text, Utility.getCurrentTime("hh:mm:ss a"));
-  //ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
-  //AppWidgetManager manager = AppWidgetManager.getInstance(context);
-  //manager.updateAppWidget(thiswidget, remoteViews);
-  ////Release the lock
-  wl.release();
+	 //remoteViews.setTextViewText(R.id.appwidget_text, Utility.getCurrentTime("hh:mm:ss a"));
+	 //ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
+	 //AppWidgetManager manager = AppWidgetManager.getInstance(context);
+	 //manager.updateAppWidget(thiswidget, remoteViews);
+	 ////Release the lock
+	 wl.release();
  }
 }
