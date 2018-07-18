@@ -46,9 +46,9 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                //WriteToFile("in Runnable before jsoup");
+                WriteToFile("in Runnable before jsoup");
                 Document document = Jsoup.connect("http://www.tgju.org/coin").get();
-                //WriteToFile("in Runnable after jsoup");
+                WriteToFile("in Runnable after jsoup");
                 Elements a = document.body().select("*");
 
                 title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
@@ -65,11 +65,11 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 title += "\n";
                 title += Integer.toString(cntr);
                 cntr = cntr + 1;
-                //WriteToFile("in Runnable at End");
+                WriteToFile("in Runnable at End");
 
             } catch (Exception e) {
                 title="error" + e.getMessage();
-                //isWriteToFile("in Runnable at Error");
+                WriteToFile("in Runnable at Error");
             }
 
             return null;
@@ -77,6 +77,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
         @Override
         protected void onPostExecute(Void result) {
+			WriteToFile("at start of postExecute");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
             views.setTextViewText(R.id.appwidget_text, title);
 
@@ -84,6 +85,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
             ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
             AppWidgetManager manager = AppWidgetManager.getInstance(context);
             manager.updateAppWidget(thiswidget, views);
+			WriteToFile("at end of postExecute");
 
         }
 
