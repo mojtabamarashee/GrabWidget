@@ -113,8 +113,8 @@ public class NewAppWidget extends AppWidgetProvider {
 		AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 		Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
 		PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-		//After after 3 seconds
-		am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 10, 10000 , pi);
+		//after 1 seconds
+		am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 1000, pi);
 		Toast.makeText(context, "onEnable", Toast.LENGTH_LONG).show();
     }
 
@@ -128,9 +128,13 @@ public class NewAppWidget extends AppWidgetProvider {
 		//am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 1000 * 5, 1000 , pi);
 		//Toast.makeText(context, "onAppWidgetOptionsChanged() called", Toast.LENGTH_SHORT).show();
 		super.onEnabled(context);
-
-
+		NewAppWidget.context = getApplicationContext();
 	}
+
+	public static Context getAppContext() {
+		return NewAppWidget.context;
+	}
+
 
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
