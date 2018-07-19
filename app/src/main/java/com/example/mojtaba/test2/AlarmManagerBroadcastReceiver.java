@@ -57,7 +57,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
 		 }
 	 };
-	 handler.post(r);
+	 //handler.post(r);
 
 	 wl.release();
  }
