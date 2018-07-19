@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class WriteToFile {
 
-    static void Write(String data) {
+    public static void Write(String data) {
         String path = "test2";
         String name = "test.txt";
         String time = Utility.getCurrentTime("hh:mm:ss a");
@@ -33,10 +33,10 @@ public class WriteToFile {
             FileOutputStream fstream = new FileOutputStream(myFile, true);
             fstream.write(data2.getBytes());
             fstream.close();
-            Toast.makeText(context, "write to file", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "write to file", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             context = NewAppWidget.getAppContext();
-            Toast.makeText(context, "writeToFile Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "writeToFile Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
     }

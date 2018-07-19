@@ -40,71 +40,13 @@ import android.widget.Toast;
 
 
 public class NewAppWidget extends AppWidgetProvider {
-
-
 	static String title;
 	int cntr = 0;
-
-	//private class Title extends AsyncTask<Void, Void, Void> {
-	//	private Context context;
-//		private AppWidgetManager appWidgetManager;
-//		private int appWidgetId;
-//		public Title(Context context, AppWidgetManager appWidgetManager, int appWidgetId)
-//		{
-//			this.context = context;
-//			this.appWidgetManager = appWidgetManager;
-//			this.appWidgetId = appWidgetId;
-//			title="loading ...";
-//		}
-//
-//		@Override
-//		protected void onPreExecute() {
-//		}
-//
-//		@Override
-//		protected Void doInBackground(Void... params) {
-//			try {
-//				Document document = Jsoup.connect("http://www.tgju.org/coin").timeout(5*1000).get();
-//				Elements a = document.body().select("*");
-//				//Elements value = a.select("body").select("main").select("div").select("table").select("tbody").select("th");
-//				title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
-//				title += ":";
-//				title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
-//				title += "\n";
-//
-//				Calendar c = Calendar.getInstance();
-//				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//				String strDate = sdf.format(c.getTime());
-//
-//				title += strDate;
-//
-//				title += "\n";
-//				title += Integer.toString(cntr);
-//				cntr = cntr + 1;
-//
-//			} catch (Exception e) {
-//				title="error : " + e.getMessage();
-//			}
-//			return null;
-//		}
-////
-//		@Override
-//		protected void onPostExecute(Void result) {
-//			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-
-//			views.setTextViewText(R.id.appwidget_text, title);
-//			appWidgetManager.updateAppWidget(appWidgetId, views);
-//		}
-//	}
+	public static Context context;
 
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-
-	Context context;
-
-
-
 		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 			views.setTextViewText(R.id.appwidget_text, "test2");
 			appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -121,9 +63,8 @@ public class NewAppWidget extends AppWidgetProvider {
 	@Override
 	public void onEnabled(Context context) {
 		super.onEnabled(context);
-		@Override
-			NewAppWidget.context = context;
-		}
+		NewAppWidget.context = context;
+	}
 
 
 	public static Context getAppContext() {

@@ -35,6 +35,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
         public Title(Context context)
         {
+            WriteToFile.Write("inTitle");
             this.context = context;
             title="loading ...";
         }
@@ -46,9 +47,9 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                //WriteToFile("in Runnable before jsoup");
+                WriteToFile.Write("in Runnable before jsoup");
                 Document document = Jsoup.connect("http://www.tgju.org/coin").get();
-                //WriteToFile("in Runnable after jsoup");
+                WriteToFile.Write("in Runnable after jsoup");
                 Elements a = document.body().select("*");
 
                 title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
@@ -65,11 +66,11 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 title += "\n";
                 title += Integer.toString(cntr);
                 cntr = cntr + 1;
-                //WriteToFile("in Runnable at End");
+                WriteToFile.Write("in Runnable at End");
 
             } catch (Exception e) {
                 title="error" + e.getMessage();
-                //isWriteToFile("in Runnable at Error");
+                WriteToFile.Write("in Runnable at Error");
             }
 
             return null;
@@ -148,20 +149,25 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
     try{
 
         Toast.makeText(contextt, "onRunnable", Toast.LENGTH_LONG).show();
-        new Title(contextt).execute();
-        handler.postDelayed(this, 1  * 1000);
+        WriteToFile.Write("onRuunable");
+        new Title(context).execute();
+
+        handler.postDelayed(this, 10  * 1000);
         //}
     }
     catch(Exception e)
     {
         //WriteToFile("run Exeption");
         title="error : " + e.getMessage()+ "title :"  + title;
+        Toast.makeText(contextt, title, Toast.LENGTH_LONG).show();
+        WriteToFile.Write(title);
+
     }
        //rm.setTextViewText(R.id.appwidget_text, Utility.getCurrentTime("hh:mm:ss a"));
 
 
 
-       handler.postDelayed(this, 1   * 1000);
+     //  handler.postDelayed(this, 1   * 1000);
    }
   };
   handler.post(r);
