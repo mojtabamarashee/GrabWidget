@@ -27,13 +27,13 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
 
 
-    private class Title extends AsyncTask<Void, Void, Void> {
+    private class Title extends AsyncTask<String, Void, Void> {
         private Context context;
         private AppWidgetManager appWidgetManager;
         private int appWidgetId;
         String title;
 
-        public Title(Context context)
+        public Title()
         {
             title="loading ...";
         }
@@ -43,11 +43,11 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         }
 
         @Override
-        protected Void doInBackground() {
+        protected Void doInBackground(String ...params) {
             try {
-                WriteToFile("in Runnable before jsoup");
+                WriteToFile.Write("in Runnable before jsoup");
                 Document document = Jsoup.connect("http://www.tgju.org/coin").get();
-                WriteToFile("in Runnable after jsoup");
+                WriteToFile.Write("in Runnable after jsoup");
                 Elements a = document.body().select("*");
 
                 title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
@@ -64,11 +64,11 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 title += "\n";
                 title += Integer.toString(cntr);
                 cntr = cntr + 1;
-                WriteToFile("in Runnable at End");
+                WriteToFile.Write("in Runnable at End");
 
             } catch (Exception e) {
                 title="error" + e.getMessage();
-                WriteToFile("in Runnable at Error");
+                WriteToFile.Write("in Runnable at Error");
             }
 
             return null;
@@ -77,7 +77,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         @Override
         protected void onPostExecute(Void result) {
 			Context context = NewAppWidget.getAppContext();
-			WriteToFile("at start of postExecute");
+			WriteToFile.Write("at start of postExecute");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
             views.setTextViewText(R.id.appwidget_text, title);
 
@@ -85,7 +85,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
             ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
             AppWidgetManager manager = AppWidgetManager.getInstance(context);
             manager.updateAppWidget(thiswidget, views);
-			WriteToFile("at end of postExecute");
+			WriteToFile.Write("at end of postExecute");
 
         }
 
@@ -122,7 +122,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 			 }
 			 catch(Exception e)
 			 {
-				 WriteToFile("run Exeption");
+				 WriteToFile.Write("run Exeption");
 				 title="error : " + e.getMessage()+ "title : "  + title;
 			 }
 			 //rm.setTextViewText(R.id.appwidget_text, Utility.getCurrentTime("hh:mm:ss a"));

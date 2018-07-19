@@ -43,6 +43,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
 
 	static String title;
+	static Context context;
 	int cntr = 0;
 
 	//private class Title extends AsyncTask<Void, Void, Void> {
@@ -128,7 +129,7 @@ public class NewAppWidget extends AppWidgetProvider {
 		//am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 1000 * 5, 1000 , pi);
 		//Toast.makeText(context, "onAppWidgetOptionsChanged() called", Toast.LENGTH_SHORT).show();
 		super.onEnabled(context);
-		NewAppWidget.context = getApplicationContext();
+		NewAppWidget.context = context;
 	}
 
 	public static Context getAppContext() {
