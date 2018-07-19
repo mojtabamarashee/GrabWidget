@@ -148,7 +148,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
        String title = "loading";
     try{
 
-        Toast.makeText(contextt, "onRunnable", Toast.LENGTH_LONG).show();
+        //Toast.makeText(contextt, "onRunnable", Toast.LENGTH_LONG).show();
         WriteToFile.Write("onRuunable");
         new Title(context).execute();
 
