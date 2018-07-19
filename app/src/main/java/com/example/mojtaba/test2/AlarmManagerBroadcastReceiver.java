@@ -23,8 +23,73 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
 
 	int cntr = 0;
- @Override
+
+ public class Title extends AsyncTask<String, Void, Void> {
+	 private Context context;
+	 private AppWidgetManager appWidgetManager;
+	 private int appWidgetId;
+	 String title;
+	 int cntr = 0;
+
+	 public Title() {
+		 title = "loading ...";
+	 }
+
+	 @Override
+	 protected void onPreExecute() {
+	 }
+
+	 @Override
+	 protected Void doInBackground(String... params) {
+		 try {
+			 WriteToFile.Write("in Runnable before jsoup");
+			 Document document = Jsoup.connect("http://www.tgju.org/coin").get();
+			 WriteToFile.Write("in Runnable after jsoup");
+			 Elements a = document.body().select("*");
+
+			 title = a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
+			 title += ":";
+			 title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
+			 title += "\n";
+
+			 Calendar c = Calendar.getInstance();
+			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			 String strDate = sdf.format(c.getTime());
+
+			 title += strDate;
+
+			 title += "\n";
+			 title += Integer.toString(cntr);
+			 cntr = cntr + 1;
+			 WriteToFile.Write("in Runnable at End");
+
+		 } catch (Exception e) {
+			 title = "error" + e.getMessage();
+			 WriteToFile.Write("in Runnable at Error");
+		 }
+
+		 return null;
+	 }
+
+	 @Override
+	 protected void onPostExecute(Void result) {
+		 Context context = NewAppWidget.getAppContext();
+		 WriteToFile.Write("at start of postExecute");
+		 RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+		 views.setTextViewText(R.id.appwidget_text, title);
+
+		 views.setTextViewText(R.id.appwidget_text, title);
+		 ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
+		 AppWidgetManager manager = AppWidgetManager.getInstance(context);
+		 manager.updateAppWidget(thiswidget, views);
+		 WriteToFile.Write("at end of postExecute");
+
+	 }
+ }
+
+	@Override
  public void onReceive(final Context context, Intent intent) {
+
   PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 	 PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "YOUR TAG");
   //Acquire the lock
@@ -36,29 +101,35 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
           R.layout.new_app_widget);
 
      final RemoteViews rm = remoteViews;
-     final Context contextt = context;
      final Handler handler = new Handler();
      Runnable r = new Runnable() {
 		 @Override
 		 public void run() {
-			 String title = "loading";
 			 try{
+				 final Context contextt = NewAppWidget.getAppContext();
+				 Toast.makeText(contextt, "on title start", Toast.LENGTH_LONG).show();
+				 String title = "loading";
 				 final Title titleTask = new Title();
 				 titleTask.execute();
-				 handler.postDelayed(this, 1 * 60 * 1000);
+				 handler.postDelayed(this, 1  * 1000);
 			 }
 			 catch(Exception e)
 			 {
+				 Toast.makeText(context, "on title error", Toast.LENGTH_LONG).show();
 				 WriteToFile.Write("run Exeption");
-				 title="error : " + e.getMessage()+ "title : "  + title;
+				 //title="error : " + e.getMessage()+ "title : "  + title;
 			 }
 			 //rm.setTextViewText(R.id.appwidget_text, Utility.getCurrentTime("hh:mm:ss a"));
-			 handler.postDelayed(this, 1 * 60 * 1000);
 
 		 }
 	 };
-	 //handler.post(r);
+	 handler.postDelayed(r, 1000);
 
+	 remoteViews.setTextViewText(R.id.appwidget_text, Utility.getCurrentTime("hh:mm:ss a"));
+	ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
+	AppWidgetManager manager = AppWidgetManager.getInstance(context);
+	 manager.updateAppWidget(thiswidget, remoteViews);
+	//Release the lock
 	 wl.release();
  }
 }
