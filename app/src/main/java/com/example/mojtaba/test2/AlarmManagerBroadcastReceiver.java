@@ -148,7 +148,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
     try{
 
         new Title(contextt).execute();
-        handler.postDelayed(this, 1 * 60 * 1000);
+        handler.postDelayed(this, 1  * 1000);
         //}
     }
     catch(Exception e)
@@ -160,7 +160,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
 
 
-       handler.postDelayed(this, 1 * 60 * 1000);
+       handler.postDelayed(this, 1   * 1000);
    }
   };
   handler.post(r);
