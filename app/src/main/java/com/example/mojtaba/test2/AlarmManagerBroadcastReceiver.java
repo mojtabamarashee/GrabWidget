@@ -22,84 +22,11 @@ import java.text.SimpleDateFormat;
 public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
 
-
-
-
-
-
-    private class Title extends AsyncTask<String, Void, Void> {
-        private Context context;
-        private AppWidgetManager appWidgetManager;
-        private int appWidgetId;
-        String title;
-
-        public Title()
-        {
-            title="loading ...";
-        }
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected Void doInBackground(String ...params) {
-            try {
-                WriteToFile.Write("in Runnable before jsoup");
-                Document document = Jsoup.connect("http://www.tgju.org/coin").get();
-                WriteToFile.Write("in Runnable after jsoup");
-                Elements a = document.body().select("*");
-
-                title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
-                title += ":";
-                title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
-                title += "\n";
-
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String strDate = sdf.format(c.getTime());
-
-                title += strDate;
-
-                title += "\n";
-                title += Integer.toString(cntr);
-                cntr = cntr + 1;
-                WriteToFile.Write("in Runnable at End");
-
-            } catch (Exception e) {
-                title="error" + e.getMessage();
-                WriteToFile.Write("in Runnable at Error");
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-			Context context = NewAppWidget.getAppContext();
-			WriteToFile.Write("at start of postExecute");
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-            views.setTextViewText(R.id.appwidget_text, title);
-
-            views.setTextViewText(R.id.appwidget_text, title);
-            ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
-            AppWidgetManager manager = AppWidgetManager.getInstance(context);
-            manager.updateAppWidget(thiswidget, views);
-			WriteToFile.Write("at end of postExecute");
-
-        }
-
-
-
-    }
-
-
-
 	int cntr = 0;
  @Override
  public void onReceive(final Context context, Intent intent) {
   PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-  PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "YOUR TAG");
+	 PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "YOUR TAG");
   //Acquire the lock
   wl.acquire();
   Toast.makeText(context, "on recive", Toast.LENGTH_LONG).show();
@@ -132,11 +59,6 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 	 };
 	 handler.post(r);
 
-	 //remoteViews.setTextViewText(R.id.appwidget_text, Utility.getCurrentTime("hh:mm:ss a"));
-	 //ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
-	 //AppWidgetManager manager = AppWidgetManager.getInstance(context);
-	 //manager.updateAppWidget(thiswidget, remoteViews);
-	 ////Release the lock
 	 wl.release();
  }
 }
