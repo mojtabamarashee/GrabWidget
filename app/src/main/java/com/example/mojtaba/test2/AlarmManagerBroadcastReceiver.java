@@ -147,6 +147,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
        String title = "loading";
     try{
 
+        Toast.makeText(contextt, "onRunnable", Toast.LENGTH_LONG).show();
         new Title(contextt).execute();
         handler.postDelayed(this, 1  * 1000);
         //}
