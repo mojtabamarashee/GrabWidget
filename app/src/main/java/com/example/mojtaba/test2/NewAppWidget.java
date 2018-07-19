@@ -101,7 +101,7 @@ public class NewAppWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-
+	Context context;
 
 
 
@@ -120,16 +120,14 @@ public class NewAppWidget extends AppWidgetProvider {
 
 	@Override
 	public void onEnabled(Context context) {
-		//super.onEnabled(context);
-		//AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-		//Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
-		//PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
-		//After after 3 seconds
-		//am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 1000 * 5, 1000 , pi);
-		//Toast.makeText(context, "onAppWidgetOptionsChanged() called", Toast.LENGTH_SHORT).show();
 		super.onEnabled(context);
+		@Override
+			NewAppWidget.context = context;
+		}
 
 
+	public static Context getAppContext() {
+		return NewAppWidget.context;
 	}
 
 	@Override
