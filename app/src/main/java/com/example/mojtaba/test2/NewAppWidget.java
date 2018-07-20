@@ -3,6 +3,7 @@ package com.example.mojtaba.test2;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.os.Build;
 import android.widget.RemoteViews;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,21 +46,56 @@ public class NewAppWidget extends AppWidgetProvider {
 	public static Context context;
 
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+    static void updateAppWidget(final Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-			views.setTextViewText(R.id.appwidget_text, "test2");
-			appWidgetManager.updateAppWidget(appWidgetId, views);
+		//RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+		//	views.setTextViewText(R.id.appwidget_text, "test2");
+		//	appWidgetManager.updateAppWidget(appWidgetId, views);
 
 
-		AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-		Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
-		PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-		//After after 3 seconds
-		am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 1 , pi);
+		//AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+		//Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+		//PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+		////After after 3 seconds
+		//am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 1 , pi);
 		Toast.makeText(context, "onEnable", Toast.LENGTH_LONG).show();
-    }
 
+
+
+		final RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
+				R.layout.new_app_widget);
+		final Handler handler = new Handler();
+		Runnable r = new Runnable() {
+
+			@Override
+			public void run() {
+				String title = "loading";
+				try {
+
+					//Toast.makeText(contextt, "onRunnable", Toast.LENGTH_LONG).show();
+					WriteToFile.Write("onRuunable");
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+						new Title(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					} else {
+
+						new Title(context).execute();
+					}
+					handler.postDelayed(this, 60 * 1000);
+					//}
+				} catch (Exception e) {
+					//WriteToFile("run Exeption");
+					title = "error : " + e.getMessage() + "title :" + title;
+					Toast.makeText(context, title, Toast.LENGTH_LONG).show();
+					WriteToFile.Write(title);
+
+				}
+				//rm.setTextViewText(R.id.appwidget_text, Utility.getCurrentTime("hh:mm:ss a"));
+			}
+		};
+
+		handler.post(r);
+
+	}
 	@Override
 	public void onEnabled(Context context) {
 		super.onEnabled(context);

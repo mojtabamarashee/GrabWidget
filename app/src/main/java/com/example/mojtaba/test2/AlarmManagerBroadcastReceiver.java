@@ -41,7 +41,6 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
   //You can do the processing here update the widget/remote views.
   final RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
           R.layout.new_app_widget);
-     final RemoteViews rm = remoteViews;
      final Context contextt = context;
      final Handler handler = new Handler();
      Runnable r = new Runnable() {
