@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.widget.RemoteViews;
@@ -20,90 +21,6 @@ import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
 public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
-
-
-
-
-
-
-
-    private class Title extends AsyncTask<Void, Void, Void> {
-        private Context context;
-        private AppWidgetManager appWidgetManager;
-        private int appWidgetId;
-        String title;
-
-        public Title(Context context)
-        {
-            WriteToFile.Write("inTitle");
-            this.context = context;
-            title="loading ...";
-        }
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                WriteToFile.Write("in Runnable before jsoup");
-                Document document = Jsoup.connect("http://www.tgju.org/coin").get();
-                WriteToFile.Write("in Runnable after jsoup");
-                Elements a = document.body().select("*");
-
-                title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
-                title += ":";
-                title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
-                title += "\n";
-
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String strDate = sdf.format(c.getTime());
-
-                title += strDate;
-
-                title += "\n";
-                title += Integer.toString(cntr);
-                cntr = cntr + 1;
-                WriteToFile.Write("in Runnable at End");
-
-            } catch (Exception e) {
-                title="error" + e.getMessage();
-                WriteToFile.Write("in Runnable at Error");
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-            views.setTextViewText(R.id.appwidget_text, title);
-
-            views.setTextViewText(R.id.appwidget_text, title);
-            ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
-            AppWidgetManager manager = AppWidgetManager.getInstance(context);
-            manager.updateAppWidget(thiswidget, views);
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -124,20 +41,6 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
   //You can do the processing here update the widget/remote views.
   final RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
           R.layout.new_app_widget);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
      final RemoteViews rm = remoteViews;
      final Context contextt = context;
      final Handler handler = new Handler();
@@ -150,9 +53,16 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
         //Toast.makeText(contextt, "onRunnable", Toast.LENGTH_LONG).show();
         WriteToFile.Write("onRuunable");
-        new Title(context).execute();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            new Title(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        }
+        else {
 
-        handler.postDelayed(this, 10  * 1000);
+            new Title(context).execute();
+
+        }
+
+        handler.postDelayed(this, 60  * 1000);
         //}
     }
     catch(Exception e)
@@ -173,13 +83,6 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
   handler.post(r);
 
 
-
-
-  //remoteViews.setTextViewText(R.id.appwidget_text, Utility.getCurrentTime("hh:mm:ss a"));
-  //ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
-  //AppWidgetManager manager = AppWidgetManager.getInstance(context);
-  //manager.updateAppWidget(thiswidget, remoteViews);
-  ////Release the lock
   wl.release();
  }
 }

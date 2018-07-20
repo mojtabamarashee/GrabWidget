@@ -56,7 +56,7 @@ public class NewAppWidget extends AppWidgetProvider {
 		Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
 		PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 		//After after 3 seconds
-		am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 10, 10000 , pi);
+		am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 1 , pi);
 		Toast.makeText(context, "onEnable", Toast.LENGTH_LONG).show();
     }
 
