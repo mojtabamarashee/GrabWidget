@@ -37,7 +37,7 @@ public class NewAppWidget extends AppWidgetProvider {
                                 int appWidgetId) {
 		Toast.makeText(context, "onEnable", Toast.LENGTH_LONG).show();
 		final RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-		final HandlerWithID handler = new Handler();
+		final Handler handler = new Handler();
 
 		Runnable r = new Runnable() {
 			@Override
