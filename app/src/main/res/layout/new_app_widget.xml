@@ -21,9 +21,21 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
+        android:textColor="#ccccff"
+        android:background="#09C"
+        android:id="@+id/refresh"
         android:src="@drawable/icons8_synchronize_24"/>
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:id="@+id/pause"
+        android:layout_marginLeft="2dip"
+        android:textColor="#ccccff"
+        android:layout_toRightOf="@+id/refresh"
+
+        android:src="@drawable/icons8_pause_24"/>
 
 
 </RelativeLayout>
