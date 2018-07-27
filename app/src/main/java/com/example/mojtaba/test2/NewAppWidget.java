@@ -34,13 +34,26 @@ public class NewAppWidget extends AppWidgetProvider {
 	static String title;
 	int cntr = 0;
 	public static Context context;
+	public static int pauseFlag = 0;
+
+	public void TogglePauseFlag()
+	{
+
+		if(pauseFlag == 0)
+		{
+			pauseFlag = 1;
+
+		}
+		else
+		{
+			pauseFlag = 0;
+		}
+	}
 
 	private static final String ACTION_WIDGET_CLICK  = "automaticWidgetSyncButtonClick";
     static void updateAppWidget(final Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-		Toast.makeText(context, "o nEnable", Toast.LENGTH_LONG).show();
 		final RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-		Toast.makeText(context, "pause", Toast.LENGTH_LONG).show();
 
 
 
@@ -52,11 +65,13 @@ public class NewAppWidget extends AppWidgetProvider {
 				try {
 
 					WriteToFile.Write("onRuunable");
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-						new Title(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-					} else {
+					if(pauseFlag == 0) {
+						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+							new Title(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+						} else {
 
-						new Title(context).execute();
+							new Title(context).execute();
+						}
 					}
 
 					handler.postDelayed(this, 60 * 1000);
@@ -78,6 +93,7 @@ public class NewAppWidget extends AppWidgetProvider {
 		super.onEnabled(context);
 		NewAppWidget.context = context;
 		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+		pauseFlag = 1;
 	}
 
 
@@ -87,22 +103,31 @@ public class NewAppWidget extends AppWidgetProvider {
 		// TODO Auto-generated method stub
 		super.onReceive(context, intent);
 
-		Toast.makeText(context, "onclick1", Toast.LENGTH_SHORT).show();
 		if (ACTION_WIDGET_CLICK.equals(intent.getAction())) {
 
-			Toast.makeText(context, "onclick2", Toast.LENGTH_LONG).show();
+			//Toast.makeText(context, "onclick2", Toast.LENGTH_LONG).show();
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-
+			int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
 			RemoteViews remoteViews;
 			ComponentName watchWidget;
 
 			watchWidget = new ComponentName(context, NewAppWidget.class);
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+			if(pauseFlag == 0) {
+				//pauseFlag = 1;
+				TogglePauseFlag();
+				Toast.makeText(context, Integer.toString(pauseFlag), Toast.LENGTH_LONG).show();
+				views.setImageViewResource(R.id.pause_12, R.drawable.icons8_play_filled_50);
+			}
+			else
+			{
+				//pauseFlag = 0;
+				TogglePauseFlag();
+				Toast.makeText(context, Integer.toString(pauseFlag), Toast.LENGTH_LONG).show();
 
-			views.setTextViewText(R.id.pause_12, "TESTING");
-			//views.setTextViewText(R.id.refresh, "TESTING");
-
-//			appWidgetManager.updateAppWidget(watchWidget, views);
+				views.setImageViewResource(R.id.pause_12, R.drawable.icons8_pause_24);
+			}
+			appWidgetManager.updateAppWidget(appWidgetId, views);
 		}
 	}
 
@@ -122,11 +147,11 @@ public class NewAppWidget extends AppWidgetProvider {
 				views.setTextViewText(R.id.appwidget_text, "test");
 
 				Intent intent = new Intent (context, getClass());
+				intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+				intent.setAction(ACTION_WIDGET_CLICK);
 				PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, 0);
-				views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
-
+				views.setOnClickPendingIntent(R.id.pause_12, pendingIntent);
 				appWidgetManager.updateAppWidget(appWidgetId, views);
-				Toast.makeText(context, "onUpdate", Toast.LENGTH_LONG).show();
 
 		}
 	}

@@ -24,7 +24,6 @@
         <receiver android:name=".NewAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.example.mojtaba.test2.ACTION_WIDGET_CLICK" />
             </intent-filter>
 
             <meta-data

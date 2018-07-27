@@ -43,7 +43,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
 
 
             //title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
-            title += "سکه امامی:";
+            title = "سکه امامی:";
             title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
             title += "\n";
             WriteToFile.Write("in Runnable after3");
