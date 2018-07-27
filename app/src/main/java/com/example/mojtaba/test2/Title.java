@@ -62,7 +62,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
             title += strDate;
 
             title += "\n";
-            title += Integer.toString(cntr);
+            //title += Integer.toString(cntr);
             WriteToFile.Write("in Runnable after7");
 
             cntr = cntr + 1;
