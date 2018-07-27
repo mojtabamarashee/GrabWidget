@@ -4,6 +4,8 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.os.Build;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RemoteViews;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,12 +35,16 @@ public class NewAppWidget extends AppWidgetProvider {
 	int cntr = 0;
 	public static Context context;
 
+	private static final String ACTION_WIDGET_CLICK  = "automaticWidgetSyncButtonClick";
     static void updateAppWidget(final Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-		Toast.makeText(context, "onEnable", Toast.LENGTH_LONG).show();
+		Toast.makeText(context, "o nEnable", Toast.LENGTH_LONG).show();
 		final RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-		final Handler handler = new Handler();
+		Toast.makeText(context, "pause", Toast.LENGTH_LONG).show();
 
+
+
+		final Handler handler = new Handler();
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {
@@ -71,7 +77,37 @@ public class NewAppWidget extends AppWidgetProvider {
 	public void onEnabled(Context context) {
 		super.onEnabled(context);
 		NewAppWidget.context = context;
+		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 	}
+
+
+
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		// TODO Auto-generated method stub
+		super.onReceive(context, intent);
+
+		Toast.makeText(context, "onclick1", Toast.LENGTH_SHORT).show();
+		if (ACTION_WIDGET_CLICK.equals(intent.getAction())) {
+
+			Toast.makeText(context, "onclick2", Toast.LENGTH_LONG).show();
+			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+
+			RemoteViews remoteViews;
+			ComponentName watchWidget;
+
+			watchWidget = new ComponentName(context, NewAppWidget.class);
+			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+
+			views.setTextViewText(R.id.pause_12, "TESTING");
+			//views.setTextViewText(R.id.refresh, "TESTING");
+
+//			appWidgetManager.updateAppWidget(watchWidget, views);
+		}
+	}
+
+
+
 
 
 	public static Context getAppContext() {
@@ -84,8 +120,14 @@ public class NewAppWidget extends AppWidgetProvider {
 			for (int appWidgetId : appWidgetIds) {
 				RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 				views.setTextViewText(R.id.appwidget_text, "test");
+
+				Intent intent = new Intent (context, getClass());
+				PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, 0);
+				views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
+
 				appWidgetManager.updateAppWidget(appWidgetId, views);
 				Toast.makeText(context, "onUpdate", Toast.LENGTH_LONG).show();
+
 		}
 	}
  

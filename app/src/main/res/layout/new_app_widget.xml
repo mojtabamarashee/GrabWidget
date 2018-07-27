@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:id="@+id/pause"
+        android:id="@+id/pause_12"
         android:layout_marginLeft="2dip"
         android:textColor="#ccccff"
         android:layout_toRightOf="@+id/refresh"
