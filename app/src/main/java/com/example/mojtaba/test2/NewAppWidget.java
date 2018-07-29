@@ -35,7 +35,7 @@ public class NewAppWidget extends AppWidgetProvider {
 	int cntr = 0;
 	public static Context context;
 	public static int pauseFlag = 0;
-
+	public static Handler handler = new Handler();
 	public void TogglePauseFlag()
 	{
 
@@ -51,13 +51,15 @@ public class NewAppWidget extends AppWidgetProvider {
 	}
 
 	private static final String ACTION_WIDGET_CLICK  = "automaticWidgetSyncButtonClick";
+	private static final String ACTION_UPDATE_CLICK  = "automaticWidgetUpdateButtonClick";
     static void updateAppWidget(final Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 		final RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 
 
 
-		final Handler handler = new Handler();
+		//final Handler handler = new Handler();
+		handler.removeCallbacksAndMessages(null);
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {
@@ -129,6 +131,23 @@ public class NewAppWidget extends AppWidgetProvider {
 			}
 			appWidgetManager.updateAppWidget(appWidgetId, views);
 		}
+		if (ACTION_UPDATE_CLICK.equals(intent.getAction())) {
+
+			//Toast.makeText(context, "onclick2", Toast.LENGTH_LONG).show();
+			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+			int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
+			RemoteViews remoteViews;
+			ComponentName watchWidget;
+
+			watchWidget = new ComponentName(context, NewAppWidget.class);
+			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+
+			updateAppWidget(context, appWidgetManager, appWidgetId);
+			Toast.makeText(context, "refresh", Toast.LENGTH_SHORT).show();
+
+
+			appWidgetManager.updateAppWidget(appWidgetId, views);
+		}
 	}
 
 
@@ -151,6 +170,16 @@ public class NewAppWidget extends AppWidgetProvider {
 				intent.setAction(ACTION_WIDGET_CLICK);
 				PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, 0);
 				views.setOnClickPendingIntent(R.id.pause_12, pendingIntent);
+
+
+				intent = new Intent (context, getClass());
+				intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+				intent.setAction(ACTION_UPDATE_CLICK);
+				pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, 0);
+				views.setOnClickPendingIntent(R.id.refresh, pendingIntent);
+
+
+
 				appWidgetManager.updateAppWidget(appWidgetId, views);
 
 		}
