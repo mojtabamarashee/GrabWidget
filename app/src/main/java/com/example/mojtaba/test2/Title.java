@@ -11,6 +11,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -46,6 +50,18 @@ public class Title extends AsyncTask<Void, Void, Void> {
             //title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
             title = "سکه امامی:";
             title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
+
+
+            //URL url = new URL("http://www.android.com/");
+            //HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            //try {
+            //    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            //    title += in;
+            //    //readStream(in);
+            //} finally {
+            //    urlConnection.disconnect();
+            //}
+
             title += "\n";
             WriteToFile.Write("in Runnable after3");
 
