@@ -57,6 +57,7 @@ public class NewAppWidget extends AppWidgetProvider {
 		final RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 
 
+		Toast.makeText(context, "start of update app widget", Toast.LENGTH_SHORT).show();
 
 		//final Handler handler = new Handler();
 		handler.removeCallbacksAndMessages(null);
@@ -80,7 +81,7 @@ public class NewAppWidget extends AppWidgetProvider {
 				}catch (Exception e) {
 					//WriteToFile.Write("run Exeption");
 					title = "error : " + e.getMessage() + "title :" + title;
-					Toast.makeText(context, title, Toast.LENGTH_LONG).show();
+					Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
 					WriteToFile.Write(title);
 
 				}
@@ -88,6 +89,7 @@ public class NewAppWidget extends AppWidgetProvider {
 		};
 
 		handler.post(r);
+		Toast.makeText(context, "handler posted", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

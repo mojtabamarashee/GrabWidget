@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -79,6 +80,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+        Toast.makeText(context, "start of postExecute", Toast.LENGTH_SHORT).show();
         views.setTextViewText(R.id.appwidget_text, title);
 
         views.setTextViewText(R.id.appwidget_text, title);
