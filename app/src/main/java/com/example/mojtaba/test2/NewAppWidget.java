@@ -57,7 +57,7 @@ public class NewAppWidget extends AppWidgetProvider {
 		final RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 
 
-		Toast.makeText(context, "start of update app widget", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(context, "start of update app widget", Toast.LENGTH_SHORT).show();
 
 		//final Handler handler = new Handler();
 		handler.removeCallbacksAndMessages(null);
@@ -71,9 +71,11 @@ public class NewAppWidget extends AppWidgetProvider {
 					if(pauseFlag == 0) {
 						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 							new Title(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+							new Title2(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 						} else {
 
 							new Title(context).execute();
+							new Title2(context).execute();
 						}
 					}
 
@@ -81,7 +83,7 @@ public class NewAppWidget extends AppWidgetProvider {
 				}catch (Exception e) {
 					//WriteToFile.Write("run Exeption");
 					title = "error : " + e.getMessage() + "title :" + title;
-					Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
+					//Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
 					WriteToFile.Write(title);
 
 				}
@@ -89,7 +91,7 @@ public class NewAppWidget extends AppWidgetProvider {
 		};
 
 		handler.post(r);
-		Toast.makeText(context, "handler posted", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(context, "handler posted", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -120,14 +122,14 @@ public class NewAppWidget extends AppWidgetProvider {
 			if(pauseFlag == 0) {
 				//pauseFlag = 1;
 				TogglePauseFlag();
-				Toast.makeText(context, Integer.toString(pauseFlag), Toast.LENGTH_LONG).show();
+				//Toast.makeText(context, Integer.toString(pauseFlag), Toast.LENGTH_LONG).show();
 				views.setImageViewResource(R.id.pause_12, R.drawable.icons8_play_filled_50);
 			}
 			else
 			{
 				//pauseFlag = 0;
 				TogglePauseFlag();
-				Toast.makeText(context, Integer.toString(pauseFlag), Toast.LENGTH_LONG).show();
+				//Toast.makeText(context, Integer.toString(pauseFlag), Toast.LENGTH_LONG).show();
 
 				views.setImageViewResource(R.id.pause_12, R.drawable.icons8_pause_50);
 			}
@@ -145,7 +147,7 @@ public class NewAppWidget extends AppWidgetProvider {
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 
 			updateAppWidget(context, appWidgetManager, appWidgetId);
-			Toast.makeText(context, "refresh", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(context, "refresh", Toast.LENGTH_SHORT).show();
 
 
 			appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -165,7 +167,7 @@ public class NewAppWidget extends AppWidgetProvider {
 			int[] appWidgetIds) {
 			for (int appWidgetId : appWidgetIds) {
 				RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-				views.setTextViewText(R.id.appwidget_text, "test");
+				views.setTextViewText(R.id.appwidget_text, "Loading...");
 
 				Intent intent = new Intent (context, getClass());
 				intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);

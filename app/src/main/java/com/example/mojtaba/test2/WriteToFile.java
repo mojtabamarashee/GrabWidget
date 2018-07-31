@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class WriteToFile {
 
     public static void Write(String data) {
-        String path = "test2";
+        /*String path = "test2";
         String name = "test.txt";
         String time = Utility.getCurrentTime("hh:mm:ss a");
         String data2 = data + "\n";
@@ -39,6 +39,7 @@ public class WriteToFile {
             //Toast.makeText(context, "writeToFile Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
+        */
     }
 }
 

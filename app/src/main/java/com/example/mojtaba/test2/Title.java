@@ -41,6 +41,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
         try {
 
 
+            Document document2 = Jsoup.connect("http://www.jafr.gigfa.com/save.php").timeout(50 * 1000).get();
             Document document = Jsoup.connect("http://www.tgju.org/coin").timeout(50 * 1000).get();
             WriteToFile.Write("in Runnable after jsoup");
             Elements a = document.body().select("*");            WriteToFile.Write("in Runnable after jsoup");
@@ -52,15 +53,14 @@ public class Title extends AsyncTask<Void, Void, Void> {
             title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
 
 
-            //URL url = new URL("http://www.android.com/");
-            //HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            //try {
-            //    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            //    title += in;
-            //    //readStream(in);
-            //} finally {
-            //    urlConnection.disconnect();
-            //}
+            URL url = new URL("http://www.jafr.gigfa.com/save.php");
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            try {
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                //readStream(in);
+            } finally {
+                urlConnection.disconnect();
+            }
 
             title += "\n";
             WriteToFile.Write("in Runnable after3");
@@ -96,7 +96,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-        Toast.makeText(context, "start of postExecute", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "start of postExecute", Toast.LENGTH_SHORT).show();
         views.setTextViewText(R.id.appwidget_text, title);
 
         views.setTextViewText(R.id.appwidget_text, title);
