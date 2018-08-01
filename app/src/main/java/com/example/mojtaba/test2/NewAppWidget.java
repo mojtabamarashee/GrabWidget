@@ -124,14 +124,14 @@ public class NewAppWidget extends AppWidgetProvider {
 			if(pauseFlag == 0) {
 				//pauseFlag = 1;
 				TogglePauseFlag();
-				//Toast.makeText(context, Integer.toString(pauseFlag), Toast.LENGTH_LONG).show();
+				Toast.makeText(context, "Pause", Toast.LENGTH_LONG).show();
 				views.setImageViewResource(R.id.pause_12, R.drawable.icons8_play_filled_50);
 			}
 			else
 			{
 				//pauseFlag = 0;
 				TogglePauseFlag();
-				//Toast.makeText(context, Integer.toString(pauseFlag), Toast.LENGTH_LONG).show();
+				Toast.makeText(context, "Play", Toast.LENGTH_LONG).show();
 
 				views.setImageViewResource(R.id.pause_12, R.drawable.icons8_pause_50);
 			}
@@ -149,7 +149,7 @@ public class NewAppWidget extends AppWidgetProvider {
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 
 			updateAppWidget(context, appWidgetManager, appWidgetId);
-			//Toast.makeText(context, "refresh", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "Refresh", Toast.LENGTH_SHORT).show();
 
 
 			appWidgetManager.updateAppWidget(appWidgetId, views);
