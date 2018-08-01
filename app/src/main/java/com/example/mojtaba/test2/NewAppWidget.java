@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RemoteViews;
@@ -68,6 +69,7 @@ public class NewAppWidget extends AppWidgetProvider {
 				try {
 
 					WriteToFile.Write("onRuunable");
+					Log.d("test", Integer.toString(pauseFlag));
 					if(pauseFlag == 0) {
 						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 							new Title(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -99,7 +101,7 @@ public class NewAppWidget extends AppWidgetProvider {
 		super.onEnabled(context);
 		NewAppWidget.context = context;
 		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-		pauseFlag = 1;
+		pauseFlag = 0;
 	}
 
 
