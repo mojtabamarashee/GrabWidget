@@ -84,7 +84,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
             WriteToFile.Write("in Runnable at End");
 
         } catch (Exception e) {
-            title+=";error" + e.getMessage();
+            title="error !";
             WriteToFile.Write("in Runnable at Error");
         }
 
