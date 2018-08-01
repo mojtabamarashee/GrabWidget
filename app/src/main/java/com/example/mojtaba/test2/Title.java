@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.webkit.WebView;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -41,11 +42,14 @@ public class Title extends AsyncTask<Void, Void, Void> {
         try {
 
 
-            Document document2 = Jsoup.connect("http://www.jafr.gigfa.com/save.php").timeout(50 * 1000).get();
+            //Document document2 = Jsoup.connect("http://www.jafr.gigfa.com/save.php").timeout(50 * 1000).get();
             Document document = Jsoup.connect("http://www.tgju.org/coin").timeout(50 * 1000).get();
             WriteToFile.Write("in Runnable after jsoup");
             Elements a = document.body().select("*");            WriteToFile.Write("in Runnable after jsoup");
             WriteToFile.Write("in Runnable after2");
+
+
+
 
 
             //title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
