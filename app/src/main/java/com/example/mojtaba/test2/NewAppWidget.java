@@ -5,30 +5,12 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.RemoteViews;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import java.util.Calendar;
 import android.os.Handler;
-import java.text.SimpleDateFormat;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import java.io.IOException;
-import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 
 public class NewAppWidget extends AppWidgetProvider {
@@ -169,7 +151,7 @@ public class NewAppWidget extends AppWidgetProvider {
 			int[] appWidgetIds) {
 			for (int appWidgetId : appWidgetIds) {
 				RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-				views.setTextViewText(R.id.appwidget_text, "Loading...");
+				views.setTextViewText(R.id.emami_text, "Loading...");
 
 				Intent intent = new Intent (context, getClass());
 				intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);

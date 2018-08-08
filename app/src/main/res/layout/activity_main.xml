@@ -7,9 +7,10 @@
     tools:context=".MainActivity">
 
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="لطفا ویجت برنامه را نصب کنید"
+        android:text="لطفا ویجت برنامه (test2) را نصب کنید"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

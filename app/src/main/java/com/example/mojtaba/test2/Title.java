@@ -23,7 +23,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
     private Context context;
     private AppWidgetManager appWidgetManager;
     private int appWidgetId;
-    String title;
+    String title, title2, date;
     int cntr;
 
     public Title(Context context)
@@ -31,6 +31,8 @@ public class Title extends AsyncTask<Void, Void, Void> {
         WriteToFile.Write("inTitle");
         this.context = context;
         title="loading ...";
+        title2="loading ...";
+
     }
 
     @Override
@@ -55,12 +57,17 @@ public class Title extends AsyncTask<Void, Void, Void> {
             title = "سکه امامی:";
             title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
 
+            title2 = "نیم سکه:";
+            title2 += a.select("body > main > div+ div  table> tbody > tr + tr + tr>th + td").get(0).text();
+
 
 
 
 
 
             title += "\n";
+            title2 += "\n";
+
             WriteToFile.Write("in Runnable after3");
 
 
@@ -74,9 +81,11 @@ public class Title extends AsyncTask<Void, Void, Void> {
             WriteToFile.Write("in Runnable after6");
 
 
-            title += strDate;
+            date = strDate;
 
             title += "\n";
+            title2 += "\n";
+
             //title += Integer.toString(cntr);
             WriteToFile.Write("in Runnable after7");
 
@@ -85,6 +94,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
 
         } catch (Exception e) {
             title="error !";
+            title2="error !";
             WriteToFile.Write("in Runnable at Error");
         }
 
@@ -95,9 +105,13 @@ public class Title extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
         //Toast.makeText(context, "start of postExecute", Toast.LENGTH_SHORT).show();
-        views.setTextViewText(R.id.appwidget_text, title);
+        views.setTextViewText(R.id.emami_text, title);
+        views.setTextViewText(R.id.nim_text,title2);
+        views.setTextViewText(R.id.date_text,date);
 
-        views.setTextViewText(R.id.appwidget_text, title);
+
+
+        //views.setTextViewText(R.id.emami_text, title);
         ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
         AppWidgetManager manager = AppWidgetManager.getInstance(context);
         manager.updateAppWidget(thiswidget, views);

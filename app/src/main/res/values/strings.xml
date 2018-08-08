@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">test2</string>
     <string name="appwidget_text">CoinWidget</string>
+    <string name="appwidget_text2">CoinWidget</string>
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
 </resources>
