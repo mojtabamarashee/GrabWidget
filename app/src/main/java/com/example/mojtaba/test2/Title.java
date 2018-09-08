@@ -44,22 +44,23 @@ public class Title extends AsyncTask<Void, Void, Void> {
         try {
 
 
-            Document document = Jsoup.connect("http://www.tgju.org/coin").timeout(50 * 1000).get();
-            WriteToFile.Write("in Runnable after jsoup");
-            Elements a = document.body().select("*");            WriteToFile.Write("in Runnable after jsoup");
-            WriteToFile.Write("in Runnable after2");
+            //Document document = Jsoup.connect("http://www.tgju.org/coin").timeout(50 * 1000).get();
+            //WriteToFile.Write("in Runnable after jsoup");
+            //Elements a = document.body().select("*");            WriteToFile.Write("in Runnable after jsoup");
+            //WriteToFile.Write("in Runnable after2");
 
 
 
 
 
-            //title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
+            ////title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
             title = "سکه امامی:";
-            title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
+            //title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
 
             title2 = "نیم سکه:";
-            title2 += a.select("body > main > div+ div  table> tbody > tr + tr + tr>th + td").get(0).text();
+            //title2 += a.select("body > main > div+ div  table> tbody > tr + tr + tr>th + td").get(0).text();
 
+			title += URLConnection.GetData("test");
 
 
 

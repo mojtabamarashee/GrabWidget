@@ -7,7 +7,7 @@ import android.widget.Toast;
 import android.content.Context;
 
 public class URLMethod {
-  public static void main(String[] argv) throws Exception {
+  public static String GetData(String[] url) {
 
 	  Context context;
 	  URL url = new URL("http://www.tgju.org/coin");
@@ -22,10 +22,12 @@ public class URLMethod {
 	  html = html.replaceAll("\\s+", " ");
 	  context = NewAppWidget.getAppContext();
 	  Pattern p = Pattern.compile("<title>(.*?)</title>");
+	  Pattern p1 = Pattern.compile("<th>??? ?????</th>td><td>(\d*\.?\d+)</td>");
 	  Matcher m = p.matcher(html);
 	  while (m.find() == true) {
 		  System.out.println(m.group(1));
-		  Toast.makeText(context, "start of postExecute", Toast.LENGTH_SHORT).show();
+		  Toast.makeText(context, m.group(1), Toast.LENGTH_SHORT).show();
 	  }
+	  return (m.group(1));
   }
 }
