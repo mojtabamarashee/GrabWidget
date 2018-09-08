@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="200pt"
-        android:layout_height="25pt"
+        android:layout_height="18pt"
         android:background="#aac"
         android:padding="1dp">
     <TextView
@@ -25,15 +25,14 @@
 
         <TextView
             android:id="@+id/date_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="false"
+            android:gravity="center"
+            android:layout_width="240dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="#06C"
             android:contentDescription="@string/appwidget_text"
             android:textColor="#ffffff"
-            android:layout_alignParentRight="true"
-            android:paddingRight="20dp"
             android:textSize="18sp"
             android:layout_marginTop="0dp"/>
 
@@ -86,7 +85,10 @@
         android:textColor="#ccccff"
         android:background="@android:color/transparent"
         android:id="@+id/refresh"
-        android:src="@drawable/icons8_refresh_50"/>
+        android:layout_marginLeft="8dip"
+        android:layout_marginTop="2dip"
+
+        android:src="@drawable/icons8_refresh"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -96,7 +98,7 @@
         android:layout_marginLeft="2dip"
         android:textColor="#ccccff"
         android:layout_alignParentRight="true"
-        android:src="@drawable/icons8_pause_50"/>
+        android:src="@drawable/icons8_pause"/>
 
 
 </RelativeLayout>

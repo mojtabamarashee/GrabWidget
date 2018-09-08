@@ -115,7 +115,7 @@ public class NewAppWidget extends AppWidgetProvider {
 				TogglePauseFlag();
 				Toast.makeText(context, "Play", Toast.LENGTH_LONG).show();
 
-				views.setImageViewResource(R.id.pause_12, R.drawable.icons8_pause_50);
+				views.setImageViewResource(R.id.pause_12, R.drawable.icons8_pause);
 			}
 			appWidgetManager.updateAppWidget(appWidgetId, views);
 		}
