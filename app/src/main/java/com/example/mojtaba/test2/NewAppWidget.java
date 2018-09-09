@@ -54,8 +54,9 @@ public class NewAppWidget extends AppWidgetProvider {
 					Log.d("test", Integer.toString(pauseFlag));
 					if(pauseFlag == 0) {
 						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-							new Title(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+							//new Title(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 							new Title2(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+							URLMethod.GetData();
 						} else {
 
 							//new Title(context).execute();
