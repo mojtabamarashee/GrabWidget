@@ -27,6 +27,8 @@ public class URLMethod {
 	  while (m.find() == true) {
 		  System.out.println(m.group(1));
 		  Toast.makeText(context, m.group(1), Toast.LENGTH_SHORT).show();
+		  RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+		  views.setTextViewText(R.id.emami_text, title);
 	  }
 	  return (m.group(1));
   }

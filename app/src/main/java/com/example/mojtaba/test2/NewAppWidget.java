@@ -60,6 +60,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
 							new Title(context).execute();
 							new Title2(context).execute();
+							URLMethod.GetData();
 						}
 					}
 
