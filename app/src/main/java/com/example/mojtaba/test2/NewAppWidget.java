@@ -58,7 +58,7 @@ public class NewAppWidget extends AppWidgetProvider {
 							new Title2(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 						} else {
 
-							new Title(context).execute();
+							//new Title(context).execute();
 							new Title2(context).execute();
 							URLMethod.GetData();
 						}
