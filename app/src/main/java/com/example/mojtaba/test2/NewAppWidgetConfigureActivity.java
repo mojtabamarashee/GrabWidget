@@ -27,6 +27,31 @@ public class NewAppWidgetConfigureActivity extends Activity {
             saveTitlePref(context, mAppWidgetId, widgetText);
 
             // It is the responsibility of the configuration activity to update the app widget
+
+			public static Handler handler = new Handler();
+			Runnable r = new Runnable() {
+				@Override
+				public void run() {
+					try {
+
+						AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+						NewAppWidget.updateAppWidget(context, appWidgetManager, mAppWidgetId);
+					}
+
+					handler.postDelayed(this, 60 * 1000);
+
+					}catch (Exception e) {
+						//WriteToFile.Write("run Exeption");
+						String title = "error : " + e.getMessage();
+						Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
+						//WriteToFile.Write(title);
+
+					}
+				}
+			};
+
+			handler.post(r);
+			
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             NewAppWidget.updateAppWidget(context, appWidgetManager, mAppWidgetId);
 

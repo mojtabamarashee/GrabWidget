@@ -54,18 +54,18 @@ public class NewAppWidget extends AppWidgetProvider {
 					Log.d("test", Integer.toString(pauseFlag));
 					if(pauseFlag == 0) {
 						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-							//new Title(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+							new Title(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 							new Title2(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-							URLMethod.GetData();
+							//URLMethod.GetData();
 						} else {
 
-							//new Title(context).execute();
+							new Title(context).execute();
 							new Title2(context).execute();
-							URLMethod.GetData();
+							//URLMethod.GetData();
 						}
 					}
 
-					handler.postDelayed(this, 60 * 1000);
+					//handler.postDelayed(this, 60 * 1000);
 				}catch (Exception e) {
 					//WriteToFile.Write("run Exeption");
 					title = "error : " + e.getMessage() + "title :" + title;
