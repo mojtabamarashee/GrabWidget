@@ -50,7 +50,15 @@ public class Title extends AsyncTask<Void, Void, Void> {
             WriteToFile.Write("in Runnable after2");
 
 
+			Calendar c = Calendar.getInstance();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String strDate = sdf.format(c.getTime());
+			date = strDate;
+			
             ////title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
+
+
             title = "سکه امامی:";
             title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
 
@@ -66,20 +74,11 @@ public class Title extends AsyncTask<Void, Void, Void> {
             title += "\n";
             title2 += "\n";
 
-            WriteToFile.Write("in Runnable after3");
 
 
-            Calendar c = Calendar.getInstance();
-            WriteToFile.Write("in Runnable after4");
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            WriteToFile.Write("in Runnable after5");
-
-            String strDate = sdf.format(c.getTime());
             WriteToFile.Write("in Runnable after6");
 
 
-            date = strDate;
 
             title += "\n";
             title2 += "\n";
