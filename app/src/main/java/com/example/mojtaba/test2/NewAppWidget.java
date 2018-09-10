@@ -43,6 +43,8 @@ public class NewAppWidget extends AppWidgetProvider {
 		//Toast.makeText(context, "start of update app widget", Toast.LENGTH_SHORT).show();
 
 		//final Handler handler = new Handler();
+
+		Toast.makeText(context, "updateAppWidget", Toast.LENGTH_SHORT).show();
 		handler.removeCallbacksAndMessages(null);
 		Runnable r = new Runnable() {
 			@Override
@@ -167,6 +169,7 @@ public class NewAppWidget extends AppWidgetProvider {
 				intent.setAction(ACTION_UPDATE_CLICK);
 				pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, 0);
 				views.setOnClickPendingIntent(R.id.refresh, pendingIntent);
+				Toast.makeText(context, "onUpdate", Toast.LENGTH_SHORT).show();
 
 
 
