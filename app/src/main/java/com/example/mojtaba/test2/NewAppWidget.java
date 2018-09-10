@@ -176,7 +176,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
 				updateAppWidget(context, appWidgetManager, appWidgetId);
 
-				//appWidgetManager.updateAppWidget(appWidgetId, views);
+				appWidgetManager.updateAppWidget(appWidgetId, views);
 
 		}
 	}
