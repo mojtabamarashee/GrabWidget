@@ -49,7 +49,7 @@ public class NewAppWidgetConfigureActivity extends Activity {
 
 					}
 
-					handler.postDelayed(this, 10 * 1000);
+					//handler.postDelayed(this, 10 * 1000);
 
             }
 			};
