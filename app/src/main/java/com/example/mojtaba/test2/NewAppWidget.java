@@ -44,7 +44,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
 		//final Handler handler = new Handler();
 
-		Toast.makeText(context, "updateAppWidget", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(context, "updateAppWidget", Toast.LENGTH_SHORT).show();
 		handler.removeCallbacksAndMessages(null);
 		Runnable r = new Runnable() {
 			@Override
@@ -171,11 +171,12 @@ public class NewAppWidget extends AppWidgetProvider {
 				intent.setAction(ACTION_UPDATE_CLICK);
 				pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, 0);
 				views.setOnClickPendingIntent(R.id.refresh, pendingIntent);
-				Toast.makeText(context, "onUpdate", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(context, "onUpdate", Toast.LENGTH_SHORT).show();
 
 
+				updateAppWidget(context, appWidgetManager, appWidgetId);
 
-				appWidgetManager.updateAppWidget(appWidgetId, views);
+				//appWidgetManager.updateAppWidget(appWidgetId, views);
 
 		}
 	}

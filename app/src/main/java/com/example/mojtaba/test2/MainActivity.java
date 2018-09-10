@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
 							.getAppWidgetIds(new ComponentName(getApplication(), NewAppWidget.class));
 						intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 						sendBroadcast(intent);
-						
+						WriteToFile.Write("main run");
+
 					}
 
 					catch (Exception e) {
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 					}
 
-					handler.postDelayed(this, 10 * 1000);
+					handler.postDelayed(this, 20 * 1000);
 
             }
 			};
