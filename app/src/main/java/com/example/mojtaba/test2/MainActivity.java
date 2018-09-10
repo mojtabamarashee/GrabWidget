@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 							.getAppWidgetIds(new ComponentName(getApplication(), NewAppWidget.class));
 						intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 						sendBroadcast(intent);
+						
 					}
 
 					catch (Exception e) {
