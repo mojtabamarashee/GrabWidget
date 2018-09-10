@@ -38,13 +38,14 @@ public class NewAppWidgetConfigureActivity extends Activity {
 
 						AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 						NewAppWidget.updateAppWidget(context, appWidgetManager, mAppWidgetId);
+						WriteToFile.Write("run in configure");
 					}
 
 					catch (Exception e) {
 						//WriteToFile.Write("run Exeption");
-						String title = "error : " + e.getMessage();
+						String title = "configure error : " + e.getMessage();
 						Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
-						//WriteToFile.Write(title);
+						WriteToFile.Write(title);
 
 					}
 

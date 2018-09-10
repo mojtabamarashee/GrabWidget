@@ -45,12 +45,9 @@ public class Title extends AsyncTask<Void, Void, Void> {
 
 
             Document document = Jsoup.connect("http://www.tgju.org/coin").timeout(50 * 1000).get();
-            //WriteToFile.Write("in Runnable after jsoup");
-            Elements a = document.body().select("*");            WriteToFile.Write("in Runnable after jsoup");
-            //WriteToFile.Write("in Runnable after2");
-
-
-
+            WriteToFile.Write("in Runnable after jsoup");
+            Elements a = document.body().select("*");            
+            WriteToFile.Write("in Runnable after2");
 
 
             ////title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();

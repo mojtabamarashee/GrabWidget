@@ -153,6 +153,8 @@ public class NewAppWidget extends AppWidgetProvider {
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
+
+			WriteToFile.Write("onUpdate");
 			for (int appWidgetId : appWidgetIds) {
 				RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 				views.setTextViewText(R.id.emami_text, "Loading...");
