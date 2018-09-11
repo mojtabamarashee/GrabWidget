@@ -25,50 +25,18 @@ public class MainActivity extends AppCompatActivity {
 		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 		sendBroadcast(intent);
 
-		final Context test = this;
+
+		public void startService(View view) {
+			startService(new Intent(getBaseContext(), MyService.class));
+		}
+
+		// Method to stop the service
+		public void stopService(View view) {
+			stopService(new Intent(getBaseContext(), MyService.class));
+		}
 
 
-
-
-
-
-
-
-		final Handler handler = new Handler();
-			Runnable r = new Runnable() {
-				@Override
-				public void run() {
-					try {
-
-						Intent intent = new Intent(test, NewAppWidget.class);
-						intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-						// Use an array and EXTRA_APPWIDGET_IDS instead of AppWidgetManager.EXTRA_APPWIDGET_ID,
-						// since it seems the onUpdate() is only fired on that:
-						int[] ids = AppWidgetManager.getInstance(getApplication())
-							.getAppWidgetIds(new ComponentName(getApplication(), NewAppWidget.class));
-						intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-						sendBroadcast(intent);
-						WriteToFile.Write("main run");
-
-					}
-
-					catch (Exception e) {
-						//WriteToFile.Write("run Exeption");
-						String title = "configure error : " + e.getMessage();
-						Toast.makeText(NewAppWidget.getAppContext(), title, Toast.LENGTH_SHORT).show();
-						WriteToFile.Write(title);
-
-					}
-
-					handler.postDelayed(this, 20 * 1000);
-
-            }
-			};
-
-			handler.post(r);
-
-
-
+		startService();
 
 
 

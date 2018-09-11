@@ -17,7 +17,44 @@ public class MyService extends Service {
    public int onStartCommand(Intent intent, int flags, int startId) {
       // Let it continue running until it is stopped.
       Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
+
+	  final Context test = this;
+
+	  final Handler handler = new Handler();
+	  Runnable r = new Runnable() {
+		  @Override
+		  public void run() {
+			  try {
+
+				  Intent intent = new Intent(test, NewAppWidget.class);
+				  intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+				  // Use an array and EXTRA_APPWIDGET_IDS instead of AppWidgetManager.EXTRA_APPWIDGET_ID,
+				  // since it seems the onUpdate() is only fired on that:
+
+				  int[] ids = AppWidgetManager.getInstance(getApplication())
+					  .getAppWidgetIds(new ComponentName(getApplication(), NewAppWidget.class));
+				  intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+				  sendBroadcast(intent);
+				  WriteToFile.Write("service run");
+
+			  }
+
+			  catch (Exception e) {
+				  //WriteToFile.Write("run Exeption");
+				  String title = "service error : " + e.getMessage();
+				  Toast.makeText(NewAppWidget.getAppContext(), title, Toast.LENGTH_SHORT).show();
+				  WriteToFile.Write(title);
+
+			  }
+
+			  handler.postDelayed(this, 20 * 1000);
+
+		  }
+	  };
+
+	  handler.post(r);
       return START_STICKY;
+
    }
 
    @Override
