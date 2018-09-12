@@ -2,13 +2,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#aac"
-    android:padding="1dp">
+    android:padding="1sp">
 
     <RelativeLayout
         android:layout_width="200pt"
         android:layout_height="25pt"
         android:background="#aac"
-        android:padding="1dp">
+        android:padding="1sp">
     <TextView
         android:id="@+id/test_text"
         android:layout_width="match_parent"
@@ -34,9 +34,9 @@
             android:contentDescription="@string/appwidget_text"
             android:textColor="#ffffff"
             android:layout_alignParentRight="true"
-            android:paddingRight="5dp"
+            android:paddingRight="5sp"
             android:textSize="18sp"
-            android:layout_marginTop="0dp"/>
+            android:layout_marginTop="0sp"/>
 
     </RelativeLayout>
 
@@ -47,7 +47,7 @@
 
     <TextView
         android:id="@+id/emami_text"
-        android:layout_width="190dp"
+        android:layout_width="190sp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="false"
         android:layout_centerVertical="false"
@@ -56,9 +56,9 @@
         android:text="@string/appwidget_text"
         android:textColor="#ffffff"
         android:layout_alignParentRight="true"
-        android:paddingRight="2dp"
-        android:textSize="18dp"
-        android:layout_marginTop="60dp"
+        android:paddingRight="2sp"
+        android:textSize="18sp"
+        android:layout_marginTop="60sp"
         android:fontFamily="@font/"
         android:textStyle="bold" />
 
@@ -66,7 +66,7 @@
 
     <TextView
         android:id="@+id/nim_text"
-        android:layout_width="170dp"
+        android:layout_width="170sp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="false"
         android:layout_centerVertical="false"
@@ -75,10 +75,10 @@
         android:text="@string/appwidget_text2"
         android:textColor="#ffffff"
         android:layout_alignParentRight="true"
-        android:paddingRight="2dp"
-        android:layout_marginRight="200dp"
-        android:layout_marginTop="60dp"
-        android:textSize="18dp"
+        android:paddingRight="2sp"
+        android:layout_marginRight="200sp"
+        android:layout_marginTop="60sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <ImageButton
