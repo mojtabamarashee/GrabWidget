@@ -19,7 +19,7 @@ public class BootDeviceReceiver extends BroadcastReceiver {
 
         String message = "BootDeviceReceiver onReceive, action is " + action;
 
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
 
         Log.d(TAG_BOOT_BROADCAST_RECEIVER, action);
 
@@ -35,10 +35,10 @@ public class BootDeviceReceiver extends BroadcastReceiver {
     private void startServiceDirectly(Context context)
     {
         try {
-            while (true) {
+            //while (true) {
                 String message = "BootDeviceReceiver onReceive start service directly.";
 
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
 
                 Log.d(TAG_BOOT_BROADCAST_RECEIVER, message);
 
@@ -47,8 +47,8 @@ public class BootDeviceReceiver extends BroadcastReceiver {
                 context.startService(startServiceIntent);
 
                 // Current thread will sleep one second.
-                Thread.sleep(10000);
-            }
+                //Thread.sleep(10000);
+            //}
         }catch(InterruptedException ex)
         {
             Log.e(TAG_BOOT_BROADCAST_RECEIVER, ex.getMessage(), ex);
@@ -71,7 +71,7 @@ public class BootDeviceReceiver extends BroadcastReceiver {
 
         String message = "Start service use repeat alarm. ";
 
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
 
         Log.d(TAG_BOOT_BROADCAST_RECEIVER, message);
 

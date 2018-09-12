@@ -25,17 +25,14 @@ public class MainActivity extends AppCompatActivity {
 		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 		sendBroadcast(intent);
 
+		if(isMyServiceRunning(MyService.class)){
 
-
-
-
-		startService();
-
-
-
-
-
+		}
+		else{
+			startService();
+		}
     }
+
 	public void startService()
 	{
 		startService(new Intent(getBaseContext(), MyService.class));
@@ -45,4 +42,17 @@ public class MainActivity extends AppCompatActivity {
 	public void stopService() {
 		stopService(new Intent(getBaseContext(), MyService.class));
 	}
+
+
+
+
+   private boolean isMyServiceRunning(Class<?> serviceClass) {
+	   ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+	   for(RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+		   if (serviceClass.getName().equals(service.service.getClassName())) {
+			   return true;
+		   }
+	   }
+	   return false;
+
 }
