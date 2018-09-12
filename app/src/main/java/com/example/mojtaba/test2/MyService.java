@@ -20,7 +20,7 @@ public class MyService extends Service {
    @Override
    public int onStartCommand(Intent intent, int flags, int startId) {
       // Let it continue running until it is stopped.
-      Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
+      //Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
 
 	  final Context test = this;
 
@@ -41,7 +41,7 @@ public class MyService extends Service {
 				  intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 				  sendBroadcast(intent);
 				  WriteToFile.Write("service run");
-				  Toast.makeText(NewAppWidget.getAppContext(), "service run", Toast.LENGTH_SHORT).show();
+				  //Toast.makeText(NewAppWidget.getAppContext(), "service run", Toast.LENGTH_SHORT).show();
 
 
 			  }
