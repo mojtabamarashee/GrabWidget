@@ -26,14 +26,7 @@ public class MainActivity extends AppCompatActivity {
 		sendBroadcast(intent);
 
 
-		public void startService(View view) {
-			startService(new Intent(getBaseContext(), MyService.class));
-		}
 
-		// Method to stop the service
-		public void stopService(View view) {
-			stopService(new Intent(getBaseContext(), MyService.class));
-		}
 
 
 		startService();
@@ -43,4 +36,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+	public void startService()
+	{
+		startService(new Intent(getBaseContext(), MyService.class));
+	}
+
+	// Method to stop the service
+	public void stopService() {
+		stopService(new Intent(getBaseContext(), MyService.class));
+	}
 }

@@ -1,7 +1,11 @@
 package com.example.mojtaba.test2;
 
 import android.app.Service;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
@@ -37,6 +41,8 @@ public class MyService extends Service {
 				  intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 				  sendBroadcast(intent);
 				  WriteToFile.Write("service run");
+				  Toast.makeText(NewAppWidget.getAppContext(), "service run", Toast.LENGTH_SHORT).show();
+
 
 			  }
 
@@ -57,17 +63,8 @@ public class MyService extends Service {
 
    }
 
-   @Override
-   public void onDestroy() {
-      super.onDestroy();
-      Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
-   }
 
 
-   @Override
-   public void onTaskRemoved() {
-      ///super.onDestroy();
-      Toast.makeText(this, "Service onTaskRemoved", Toast.LENGTH_LONG).show();
-   }
+
 
 }
