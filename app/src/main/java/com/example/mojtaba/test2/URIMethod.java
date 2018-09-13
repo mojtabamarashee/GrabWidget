@@ -12,16 +12,24 @@ import android.content.Context;
 import com.example.mojtaba.test2.R;
 
 public class URIMethod {
-  public static String GetData() throws Exception{
+  public static String GetData(Context context) throws Exception{
 
-	  Context context;
+//	  Toast.makeText(context,"in uri", Toast.LENGTH_SHORT).show();
+
 	  URL url = new URL("http://www.tgju.org/coin");
 	  URLConnection urlConnection = url.openConnection();
 	  DataInputStream dis = new DataInputStream(urlConnection.getInputStream());
 	  String html = "", tmp = "";
-	  while ((tmp = dis.readUTF()) != null) {
-		  html += " " + tmp;
+	  try {
+		  while ((tmp = dis.readUTF()) != null) {
+			  html += " " + tmp;
+		  }
 	  }
+	  catch(Exception e){
+
+
+	  }
+
 	  dis.close();
 
 	  html = html.replaceAll("\\s+", " ");
@@ -31,7 +39,6 @@ public class URIMethod {
 	  Matcher m = p.matcher(html);
 	  while (m.find() == true) {
 		  System.out.println(m.group(1));
-		  Toast.makeText(NewAppWidget.getAppContext(), m.group(1), Toast.LENGTH_SHORT).show();
 		  //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 		 // views.setTextViewText(R.id.emami_text, "salam");
 	  }
