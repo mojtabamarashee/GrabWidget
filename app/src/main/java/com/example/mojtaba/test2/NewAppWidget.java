@@ -111,7 +111,7 @@ public class NewAppWidget extends AppWidgetProvider {
 				//pauseFlag = 1;
 				TogglePauseFlag();
 				Toast.makeText(context, "Pause", Toast.LENGTH_LONG).show();
-				views.setImageViewResource(R.id.pause_12, R.drawable.icons8_play_filled_50);
+				views.setImageViewResource(R.id.pause_12, R.drawable.play_30);
 			}
 			else
 			{
@@ -119,7 +119,7 @@ public class NewAppWidget extends AppWidgetProvider {
 				TogglePauseFlag();
 				Toast.makeText(context, "Play", Toast.LENGTH_LONG).show();
 
-				views.setImageViewResource(R.id.pause_12, R.drawable.icons8_pause_50);
+				views.setImageViewResource(R.id.pause_12, R.drawable.pause_30);
 			}
 			appWidgetManager.updateAppWidget(appWidgetId, views);
 		}

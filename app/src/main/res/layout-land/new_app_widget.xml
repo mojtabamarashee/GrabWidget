@@ -91,7 +91,7 @@
         android:textColor="#ccccff"
         android:background="@android:color/transparent"
         android:id="@+id/refresh"
-        android:src="@drawable/icons8_refresh_50"/>
+        android:src="@drawable/update_30"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
         android:layout_marginLeft="2dip"
         android:textColor="#ccccff"
         android:layout_alignParentRight="true"
-        android:src="@drawable/icons8_pause_50"/>
+        android:src="@drawable/pause_30"/>
 
 
 </RelativeLayout>
