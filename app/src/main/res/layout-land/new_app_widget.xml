@@ -47,8 +47,7 @@
 
     <TextView
         android:id="@+id/emami_text"
-        android:layout_width="wrap_content"
-        android:layout_weight=".50"
+        android:layout_width="190sp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="false"
         android:layout_centerVertical="false"
@@ -57,7 +56,8 @@
         android:text="@string/appwidget_text"
         android:textColor="#ffffff"
         android:layout_alignParentRight="true"
-        android:textSize="16sp"
+        android:paddingRight="2sp"
+        android:textSize="18sp"
         android:layout_marginTop="60sp"
         android:fontFamily="@font/"
         android:autoSizeTextType="uniform"
@@ -67,7 +67,7 @@
 
     <TextView
         android:id="@+id/nim_text"
-        android:layout_width="wrap_content"
+        android:layout_width="190sp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="false"
         android:layout_centerVertical="false"
@@ -75,15 +75,15 @@
         android:contentDescription="@string/appwidget_text2"
         android:text="@string/appwidget_text2"
         android:textColor="#ffffff"
-        android:layout_alignParentLeft="true"
-        android:layout_marginEnd="100sp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="200sp"
         android:layout_marginTop="60sp"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:singleLine="true"
         android:ellipsize="none"
         android:autoSizeTextType="uniform"
 
-        android:textStyle="" />
+        android:textStyle="bold" />
 
     <ImageButton
         android:layout_width="wrap_content"

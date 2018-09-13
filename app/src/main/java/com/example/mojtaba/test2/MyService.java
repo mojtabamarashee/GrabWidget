@@ -1,5 +1,6 @@
 package com.example.mojtaba.test2;
 
+import android.app.ActivityManager;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -65,7 +66,7 @@ public class MyService extends Service {
 
    private boolean isMyServiceRunning(Class<?> serviceClass) {
 	   ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-	   for(RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+	   for(ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
 		   if (serviceClass.getName().equals(service.service.getClassName())) {
 			   return true;
 		   }
