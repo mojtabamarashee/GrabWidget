@@ -3,6 +3,7 @@ package com.example.mojtaba.test2;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.webkit.WebView;
@@ -66,6 +67,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
             title2 += a.select("body > main > div+ div  table> tbody > tr + tr + tr>th + td").get(0).text();
 
             //title += URIMethod.GetData();
+            URIMethod.GetData();
 
 
             title += "\n";
@@ -96,20 +98,31 @@ public class Title extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void result) {
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+
         if (error == 0) {
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
             //Toast.makeText(context, "start of postExecute", Toast.LENGTH_SHORT).show();
             views.setTextViewText(R.id.emami_text, title);
             views.setTextViewText(R.id.nim_text, title2);
             views.setTextViewText(R.id.date_text, date);
 
+            views.setTextColor(R.id.date_text, Color.WHITE);
+            //views.setInt(R.id.date_text, "setBackgroundColor", android.graphics.Color.RED);
 
-            //views.setTextViewText(R.id.emami_text, title);
-            ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
-            AppWidgetManager manager = AppWidgetManager.getInstance(context);
-            WriteToFile.Write("update widget");
-            manager.updateAppWidget(thiswidget, views);
         }
+        else {
+
+            //views.setInt(R.id.date_text, "setBackgroundColor", android.graphics.Color.RED);
+            views.setTextColor(R.id.date_text, android.graphics.Color.RED);
+        }
+
+
+        //views.setTextViewText(R.id.emami_text, title);
+        ComponentName thiswidget = new ComponentName(context, NewAppWidget.class);
+        AppWidgetManager manager = AppWidgetManager.getInstance(context);
+        WriteToFile.Write("update widget");
+        manager.updateAppWidget(thiswidget, views);
+
     }
 }
 

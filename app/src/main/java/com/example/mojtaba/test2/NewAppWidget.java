@@ -157,7 +157,7 @@ public class NewAppWidget extends AppWidgetProvider {
 			WriteToFile.Write("onUpdate");
 			for (int appWidgetId : appWidgetIds) {
 				RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-				views.setTextViewText(R.id.emami_text, "Loading...");
+				//views.setTextViewText(R.id.emami_text, "Loading...");
 
 				Intent intent = new Intent (context, getClass());
 				intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
