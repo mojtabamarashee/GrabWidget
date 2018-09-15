@@ -37,12 +37,12 @@ public class URIMethod {
 
 	  dis.close();
 
-	  html = html.replaceAll("\\s+", " ");
+	  //html = html.replaceAll("\\s+", " ");
 	  html = html.replaceAll(",", "");
 
 	  //context = NewAppWidget().getAppContext();
 	  Pattern p = Pattern.compile("<title>(.*?)</title>");
-	  Pattern p1 = Pattern.compile("(<th>سکهامامی</th><td>(\\d+)(</td>)");
+	  Pattern p1 = Pattern.compile("(<th>)(.*)(سکه امامی)(.*)(</th><td>)(.*)(\\d+)(.*)(</td>)");
 	  Matcher m = p1.matcher(html);
 	  WriteToFile.Write("before pattern match");
 
@@ -59,6 +59,9 @@ public class URIMethod {
 
 
 	  }
+
+	  WriteToFile.Write("html = "+ html);
+
 	  WriteToFile.Write("before exit");
 
 
