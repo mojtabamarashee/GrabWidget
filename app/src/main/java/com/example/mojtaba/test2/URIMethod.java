@@ -25,7 +25,7 @@ public class URIMethod {
 	  String html = "", tmp = "";
 	  try {
 		  while ((tmp = dis.readUTF()) != null) {
-			  html += " " + tmp;
+			  html += tmp;
 		  }
 	  }
 	  catch(Exception e){
@@ -39,10 +39,12 @@ public class URIMethod {
 
 	  html = html.replaceAll("\\s+", "");
 	  html = html.replaceAll(",", "");
+	  WriteToFile.Write("html3 = "+ html);
+
 
 	  //context = NewAppWidget().getAppContext();
 	  Pattern p = Pattern.compile("<title>(.*?)</title>");
-	  Pattern p1 = Pattern.compile("(<th>Ó˜å ÇãÇãí</th><td>)(\\d+)(</td>)");
+	  Pattern p1 = Pattern.compile("(<th>Ø³Ú©Ù‡ Ø§Ù…Ø§Ù…ÛŒ</th><td>)(\\d+).*(</td>)");
 	  Matcher m = p1.matcher(html);
 	  WriteToFile.Write("before pattern match");
 
@@ -60,7 +62,7 @@ public class URIMethod {
 
 	  }
 
-	  WriteToFile.Write("html = "+ html);
+	  WriteToFile.Write("html2 = "+ html);
 
 	  WriteToFile.Write("before exit");
 
