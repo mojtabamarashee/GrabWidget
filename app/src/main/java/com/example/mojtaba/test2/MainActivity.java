@@ -37,12 +37,22 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void startService() {
+
+
+		//Intent serviceIntent = new Intent("com.microapple.googleplace.bgservice");
+		//serviceIntent.putExtra("UserID", "123456");
+		//this.startService(serviceIntent);
+
+
 		startService(new Intent(getBaseContext(), MyService.class));
 		//Toast.makeText(NewAppWidget.getAppContext(), "service start", Toast.LENGTH_SHORT).show();
 	}
 
 	// Method to stop the service
 	public void stopService() {
+
+
+
 		stopService(new Intent(getBaseContext(), MyService.class));
 		//Toast.makeText(NewAppWidget.getAppContext(), "service stop", Toast.LENGTH_SHORT).show();
 
