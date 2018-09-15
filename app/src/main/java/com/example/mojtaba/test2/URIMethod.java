@@ -37,7 +37,7 @@ public class URIMethod {
 
 	  dis.close();
 
-	  html = html.replaceAll("\\s+", " ");
+	  html = html.replaceAll("\\s+", "");
 	  html = html.replaceAll(",", "");
 
 	  //context = NewAppWidget().getAppContext();
