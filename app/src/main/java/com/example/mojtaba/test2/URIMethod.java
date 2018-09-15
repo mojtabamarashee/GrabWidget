@@ -37,12 +37,12 @@ public class URIMethod {
 
 	  dis.close();
 
-	  //html = html.replaceAll("\\s+", " ");
+	  html = html.replaceAll("\\s+", " ");
 	  html = html.replaceAll(",", "");
 
 	  //context = NewAppWidget().getAppContext();
 	  Pattern p = Pattern.compile("<title>(.*?)</title>");
-	  Pattern p1 = Pattern.compile("(<th>)(.*)(Ø³Ú©Ù‡ Ø§Ù…Ø§Ù…ÛŒ)(.*)(</th><td>)(.*)(\\d+)(.*)(</td>)");
+	  Pattern p1 = Pattern.compile("(<th>Ó˜å ÇãÇãí</th><td>)(\\d+)(</td>)");
 	  Matcher m = p1.matcher(html);
 	  WriteToFile.Write("before pattern match");
 
@@ -52,10 +52,10 @@ public class URIMethod {
 		 // views.setTextViewText(R.id.emami_text, "salam");
 		  WriteToFile.Write("find pattern");
 
-		  WriteToFile.Write("find pattern0"+ m.group(0));
-
 		  WriteToFile.Write("find pattern1"+ m.group(1));
-		  return (m.group(1));
+
+		  WriteToFile.Write("find pattern2"+ m.group(2));
+		  return (m.group(2));
 
 
 	  }
