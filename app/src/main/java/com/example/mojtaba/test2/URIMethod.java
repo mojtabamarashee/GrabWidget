@@ -15,10 +15,13 @@ public class URIMethod {
   public static String GetData(Context context) throws Exception{
 
 //	  Toast.makeText(context,"in uri", Toast.LENGTH_SHORT).show();
+	  WriteToFile.Write("in URIMEthod");
 
 	  URL url = new URL("http://www.tgju.org/coin");
 	  URLConnection urlConnection = url.openConnection();
 	  DataInputStream dis = new DataInputStream(urlConnection.getInputStream());
+	  WriteToFile.Write("data recv");
+
 	  String html = "", tmp = "";
 	  try {
 		  while ((tmp = dis.readUTF()) != null) {
@@ -29,19 +32,37 @@ public class URIMethod {
 
 
 	  }
+	  WriteToFile.Write("before close");
+
 
 	  dis.close();
 
 	  html = html.replaceAll("\\s+", " ");
+	  html = html.replaceAll(",", "");
+
 	  //context = NewAppWidget().getAppContext();
 	  Pattern p = Pattern.compile("<title>(.*?)</title>");
-	  Pattern p1 = Pattern.compile("<th>سکه امامی</th>td><td>(d*.?d+)</td>");
-	  Matcher m = p.matcher(html);
+	  Pattern p1 = Pattern.compile("(<th>سکهامامی</th><td>(\\d+)(</td>)");
+	  Matcher m = p1.matcher(html);
+	  WriteToFile.Write("before pattern match");
+
 	  while (m.find() == true) {
-		  System.out.println(m.group(1));
+		  //System.out.println(m.group(1));
 		  //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 		 // views.setTextViewText(R.id.emami_text, "salam");
+		  WriteToFile.Write("find pattern");
+
+		  WriteToFile.Write("find pattern0"+ m.group(0));
+
+		  WriteToFile.Write("find pattern1"+ m.group(1));
+		  return (m.group(1));
+
+
 	  }
-	  return (m.group(1));
+	  WriteToFile.Write("before exit");
+
+
+
+      return ("error");
   }
 }

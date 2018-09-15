@@ -61,12 +61,12 @@ public class Title extends AsyncTask<Void, Void, Void> {
 
 
             title = "سکه امامی:";
-            title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
+            //title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
 
             title2 = "نیم سکه:";
             title2 += a.select("body > main > div+ div  table> tbody > tr + tr + tr>th + td").get(0).text();
 
-           // title += URIMethod.GetData(this.context);
+            title += URIMethod.GetData(this.context);
 
 
 
