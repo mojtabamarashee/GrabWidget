@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
 	// Method to stop the service
 	public void stopService() {
 
-
-
 		stopService(new Intent(getBaseContext(), MyService.class));
 		//Toast.makeText(NewAppWidget.getAppContext(), "service stop", Toast.LENGTH_SHORT).show();
 
