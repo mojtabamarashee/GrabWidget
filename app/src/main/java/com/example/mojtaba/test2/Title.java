@@ -53,7 +53,6 @@ public class Title extends AsyncTask<Void, Void, Void> {
 
             //Document document = Jsoup.connect("http://www.tgju.org/coin").timeout(20 * 1000).get();
             WriteToFile.Write("in Runnable after jsoup");
-            //Elements a = document.body().select("*");
             WriteToFile.Write("in Runnable after2");
 
 
@@ -66,7 +65,11 @@ public class Title extends AsyncTask<Void, Void, Void> {
             title2 = "نیم سکه:";
             //title2 += a.select("body > main > div+ div  table> tbody > tr + tr + tr>th + td").get(0).text();
 
-            title += URIMethod.GetData(this.context);
+            String [] out  = URIMethod.GetData(this.context);
+
+            title += out[0];
+            title2 += out[1];
+
 
 
 

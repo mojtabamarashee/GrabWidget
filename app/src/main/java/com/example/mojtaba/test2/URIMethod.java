@@ -16,10 +16,11 @@ import android.content.Context;
 import com.example.mojtaba.test2.R;
 
 public class URIMethod {
-  public static String GetData(Context context) throws Exception{
+  public static String[] GetData(Context context) throws Exception{
 
 //	  Toast.makeText(context,"in uri", Toast.LENGTH_SHORT).show();
 	  WriteToFile.Write("in URIMEthod");
+	  String[] out = new String[10];
 
 	  URL url = new URL("http://www.tgju.org/coin");
 	  URLConnection urlConnection = url.openConnection();
@@ -58,32 +59,33 @@ public class URIMethod {
 
 
 	  //context = NewAppWidget().getAppContext();
-	  Pattern p = Pattern.compile("<title>(.*?)</title>");
-	  Pattern p1 = Pattern.compile("<th>سکهامامی</th><td>(4\\d{7})</td>");
-	//  String my = getStringFromInputStream(dis);
-
+	  //Pattern p = Pattern.compile("<title>(.*?)</title>");
+	  Pattern p1 = Pattern.compile("<th>سکهامامی</th><td>(\\d{8})</td>");
 	  Matcher m = p1.matcher(html);
 	  WriteToFile.Write("before pattern match");
 
 	  while (m.find() == true) {
 
 		  WriteToFile.Write("find pattern");
-
-		  //WriteToFile.Write("find pattern1"+ m.group(1));
-
-		 // WriteToFile.Write("find pattern2"+ m.group(2));
-		 // WriteToFile.Write("html5 = "+ html);
-
-		  return (m.group(1));
+		  out[0] = m.group(1);
+		  break;
 	  }
 
-	 // WriteToFile.Write("html2 = "+ html);
+	  p1 = Pattern.compile("<th>نیمسکه</th><td>(\\d{8})</td>");
+	  m = p1.matcher(html);
+
+	  while (m.find() == true) {
+
+		  WriteToFile.Write("find pattern");
+		  out[1] = m.group(1);
+		  break;
+	  }
 
 	  WriteToFile.Write("before exit");
 
 
 
-      return ("error");
+      return (out);
   }
 
 	public static String getStringFromInputStream(InputStream stream) throws IOException
