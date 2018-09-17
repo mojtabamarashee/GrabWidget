@@ -49,17 +49,13 @@ public class URIMethod {
 	  WriteToFile.Write("before pattern match");
 
 	  while (m.find() == true) {
-		  //System.out.println(m.group(1));
-		  //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-		 // views.setTextViewText(R.id.emami_text, "salam");
+
 		  WriteToFile.Write("find pattern");
 
 		  WriteToFile.Write("find pattern1"+ m.group(1));
 
 		  WriteToFile.Write("find pattern2"+ m.group(2));
 		  return (m.group(2));
-
-
 	  }
 
 	  WriteToFile.Write("html2 = "+ html);
