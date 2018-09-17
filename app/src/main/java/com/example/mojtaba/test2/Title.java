@@ -51,9 +51,9 @@ public class Title extends AsyncTask<Void, Void, Void> {
             String strDate = sdf.format(c.getTime());
             date = strDate;
 
-            Document document = Jsoup.connect("http://www.tgju.org/coin").timeout(20 * 1000).get();
+            //Document document = Jsoup.connect("http://www.tgju.org/coin").timeout(20 * 1000).get();
             WriteToFile.Write("in Runnable after jsoup");
-            Elements a = document.body().select("*");
+            //Elements a = document.body().select("*");
             WriteToFile.Write("in Runnable after2");
 
 
@@ -64,7 +64,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
             //title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
 
             title2 = "نیم سکه:";
-            title2 += a.select("body > main > div+ div  table> tbody > tr + tr + tr>th + td").get(0).text();
+            //title2 += a.select("body > main > div+ div  table> tbody > tr + tr + tr>th + td").get(0).text();
 
             title += URIMethod.GetData(this.context);
 
