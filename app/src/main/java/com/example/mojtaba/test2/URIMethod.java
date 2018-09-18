@@ -81,6 +81,27 @@ public class URIMethod {
 		  break;
 	  }
 
+	  p1 = Pattern.compile("<th>ربعسکه</th><td>(\\d{8})</td>");
+	  m = p1.matcher(html);
+	  WriteToFile.Write("before pattern match");
+
+	  while (m.find() == true) {
+
+		  WriteToFile.Write("find pattern");
+		  out[2] = m.group(1);
+		  break;
+	  }
+
+	  p1 = Pattern.compile("<th>سکهگرمی</th><td>(\\d+)</td>");
+	  m = p1.matcher(html);
+
+	  while (m.find() == true) {
+
+		  WriteToFile.Write("find pattern");
+		  out[3] = m.group(1);
+		  break;
+	  }
+
 	  WriteToFile.Write("before exit");
 
 

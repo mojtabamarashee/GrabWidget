@@ -26,7 +26,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
     private Context context;
     private AppWidgetManager appWidgetManager;
     private int appWidgetId;
-    String title, title2, date;
+    String title, title2, date, title3, title4;
     int cntr;
     int error = 0;
 
@@ -35,6 +35,9 @@ public class Title extends AsyncTask<Void, Void, Void> {
         this.context = context;
         title = "loading ...";
         title2 = "loading ...";
+        title3 = "loading ...";
+        title4 = "loading ...";
+
 
     }
 
@@ -60,27 +63,28 @@ public class Title extends AsyncTask<Void, Void, Void> {
 
 
             title = "سکه امامی:";
-            //title += a.select("body > main > div+ div  table> tbody > tr + tr >th + td").get(0).text();
-
             title2 = "نیم سکه:";
+            title3 = "ربع سکه:";
+            title4 = "سکه گرمی:";
+
             //title2 += a.select("body > main > div+ div  table> tbody > tr + tr + tr>th + td").get(0).text();
 
             String [] out  = URIMethod.GetData(this.context);
 
             title += out[0];
             title2 += out[1];
+            title3 += out[2];
+            title4 += out[3];
 
 
 
 
-            title += "\n";
-            title2 += "\n";
+
 
 
             WriteToFile.Write("in Runnable after6");
 
-            title += "\n";
-            title2 += "\n";
+
 
             //title += Integer.toString(cntr);
             WriteToFile.Write("in Runnable after7");
@@ -107,6 +111,8 @@ public class Title extends AsyncTask<Void, Void, Void> {
             //Toast.makeText(context, "start of postExecute", Toast.LENGTH_SHORT).show();
             views.setTextViewText(R.id.emami_text, title);
             views.setTextViewText(R.id.nim_text, title2);
+            views.setTextViewText(R.id.rob_text, title3);
+            views.setTextViewText(R.id.gerami_text, title4);
             views.setTextViewText(R.id.date_text, date);
 
             views.setTextColor(R.id.date_text, Color.WHITE);

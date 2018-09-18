@@ -57,7 +57,7 @@
         android:textColor="#ffffff"
         android:layout_alignParentRight="true"
         android:textSize="16sp"
-        android:layout_marginTop="40sp"
+        android:layout_marginTop="50sp"
         android:fontFamily="@fonts/dastnevis.ttf"
         android:autoSizeTextType="uniform"
         android:textStyle="" />
@@ -76,13 +76,58 @@
         android:textColor="#ffffff"
         android:layout_alignParentLeft="true"
         android:layout_marginEnd="100sp"
-        android:layout_marginTop="40sp"
+        android:layout_marginTop="50sp"
         android:textSize="16sp"
         android:singleLine="true"
         android:ellipsize="none"
         android:autoSizeTextType="uniform"
         android:fontFamily="@fonts/dastnevis.ttf"
          />
+
+    <TextView
+        android:id="@+id/rob_text"
+        android:layout_below="@+id/emami_text"
+        android:layout_width="wrap_content"
+        android:layout_weight=".50"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="false"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/appwidget_text"
+        android:text="مقداردهی"
+        android:textColor="#ffffff"
+        android:layout_alignParentRight="true"
+        android:textSize="16sp"
+        android:layout_marginTop="30sp"
+        android:fontFamily="@fonts/dastnevis.ttf"
+        android:autoSizeTextType="uniform"
+        android:textStyle="" />
+
+
+
+    <TextView
+        android:id="@+id/gerami_text"
+        android:layout_below="@+id/nim_text"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="false"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/appwidget_text2"
+        android:text="مقداردهی"
+        android:textColor="#ffffff"
+        android:layout_alignParentLeft="true"
+        android:layout_marginEnd="100sp"
+        android:layout_marginTop="30sp"
+        android:textSize="16sp"
+        android:singleLine="true"
+        android:ellipsize="none"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@fonts/dastnevis.ttf"
+        />
+
+
 
 
 
