@@ -18,7 +18,6 @@ import com.example.mojtaba.test2.R;
 public class URIMethod {
   public static String[] GetData(Context context) throws Exception{
 
-//	  Toast.makeText(context,"in uri", Toast.LENGTH_SHORT).show();
 	  WriteToFile.Write("in URIMEthod");
 	  String[] out = new String[10];
 
@@ -30,32 +29,18 @@ public class URIMethod {
 	  WriteToFile.Write("data recv");
 
 
-	  /*String html="", tmp = "";
-	  try {
-		  while ((tmp = dis.readUTF()) != null) {
-			  html+=(tmp);
-		  }
-	  }
-	  catch(Exception e){
 
-
-	  }*/
 
 	  String html = getStringFromInputStream(dis);
 
 	  WriteToFile.Write("before close");
 
-	 /* for(int i = 0; i < 200; i++) {
-		  WriteToFile.Write("html3 = "+ html);
-
-	  }*/
 
 		  dis.close();
 
 	  html = html.replaceAll("\\s+", "");
 
 	  html = html.replaceAll(",", "");
-	  WriteToFile.Write("html3 = "+ html);
 
 
 	  //context = NewAppWidget().getAppContext();

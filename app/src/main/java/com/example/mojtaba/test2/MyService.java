@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 public class MyService extends Service {
+	int distroy = 0;
    @Nullable
    @Override
    public IBinder onBind(Intent intent) {
@@ -24,6 +25,9 @@ public class MyService extends Service {
       //Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
 
 	  final Context test = this;
+	  final int interval;
+	  interval = intent.getIntExtra("interval", 0);
+	  WriteToFile.Write("interval in service" + Integer.toString(interval));
 
 	  final Handler handler = new Handler();
 	  Runnable r = new Runnable() {
@@ -54,7 +58,8 @@ public class MyService extends Service {
 
 			  }
 
-			  handler.postDelayed(this, 20 * 1000);
+
+				  handler.postDelayed(this, 10 * 1000);
 
 		  }
 	  };
@@ -64,16 +69,14 @@ public class MyService extends Service {
 
    }
 
-   private boolean isMyServiceRunning(Class<?> serviceClass) {
-	   ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-	   for(ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-		   if (serviceClass.getName().equals(service.service.getClassName())) {
-			   return true;
-		   }
-	   }
-	   return false;
-}
+	@Override
+	public void onDestroy() {
 
+		//Log.i(TAG, "onCreate() , service stopped...");
+		super.onDestroy();
+		//distroy = 1;
 
+		//WriteToFile.Write("service is stoped");
 
+	}
 }

@@ -6,16 +6,46 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+	int interval = 10;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+
+		final EditText field1 = (EditText)findViewById(R.id.interval);
+
+		field1.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				WriteToFile.Write("after change" + (field1.getText()));
+				interval = Integer.parseInt(field1.getText().toString());
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start,
+										  int count, int after) {
+				//WriteToFile.Write("beforeChange"+ field1.getText());
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start,
+									  int before, int count) {
+				//WriteToFile.Write("onChange"+ field1.getText());
+			}
+		});
 
 
 
@@ -29,27 +59,24 @@ public class MainActivity extends AppCompatActivity {
 		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 		sendBroadcast(intent);
 
-		if (isMyServiceRunning(MyService.class)) {
+		//StopService();
+
+		if (false/*isMyServiceRunning(MyService.class)*/) {
 
 		} else {
-			startService();
+			StartService();
 		}
 	}
 
-	public void startService() {
+	public void StartService() {
 
-
-		//Intent serviceIntent = new Intent("com.microapple.googleplace.bgservice");
-		//serviceIntent.putExtra("UserID", "123456");
-		//this.startService(serviceIntent);
-
-
-		startService(new Intent(getBaseContext(), MyService.class));
-		//Toast.makeText(NewAppWidget.getAppContext(), "service start", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(getBaseContext(), MyService.class);
+		intent.putExtra("interval", interval);
+		startService(intent);
 	}
 
 	// Method to stop the service
-	public void stopService() {
+	public void StopService() {
 
 		stopService(new Intent(getBaseContext(), MyService.class));
 		//Toast.makeText(NewAppWidget.getAppContext(), "service stop", Toast.LENGTH_SHORT).show();
@@ -57,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 
-	private boolean isMyServiceRunning(Class<?> serviceClass) {
+	/*private boolean isMyServiceRunning(Class<?> serviceClass) {
 		ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 		for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
 			if (serviceClass.getName().equals(service.service.getClassName())) {
@@ -65,5 +92,5 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}
 		return false;
-	}
+	}*/
 }
