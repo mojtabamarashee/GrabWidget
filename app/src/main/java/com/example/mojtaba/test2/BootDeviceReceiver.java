@@ -38,7 +38,7 @@ public class BootDeviceReceiver extends BroadcastReceiver {
             //while (true) {
                 String message = "BootDeviceReceiver onReceive start service directly.";
 
-                Toast.makeText(NewAppWidget.getAppContext(), message, Toast.LENGTH_LONG).show();
+                //Toast.makeText(NewAppWidget.getAppContext(), message, Toast.LENGTH_LONG).show();
 
                 Log.d(TAG_BOOT_BROADCAST_RECEIVER, message);
 
