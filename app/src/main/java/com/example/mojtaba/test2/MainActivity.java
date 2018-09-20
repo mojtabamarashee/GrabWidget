@@ -17,6 +17,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
 	int interval = 10;
+	Intent serviceIntent;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 			public void afterTextChanged(Editable s) {
 				WriteToFile.Write("after change" + (field1.getText()));
 				interval = Integer.parseInt(field1.getText().toString());
+				StopService();
 
 			}
 
@@ -70,16 +72,16 @@ public class MainActivity extends AppCompatActivity {
 
 	public void StartService() {
 
-		Intent intent = new Intent(getBaseContext(), MyService.class);
-		intent.putExtra("interval", interval);
-		startService(intent);
+		serviceIntent = new Intent(getBaseContext(), MyService.class);
+		serviceIntent.putExtra("interval", interval);
+		startService(serviceIntent);
 	}
 
 	// Method to stop the service
 	public void StopService() {
 
-		stopService(new Intent(getBaseContext(), MyService.class));
-		//Toast.makeText(NewAppWidget.getAppContext(), "service stop", Toast.LENGTH_SHORT).show();
+		stopService(serviceIntent);
+		Toast.makeText(this, "service stop", Toast.LENGTH_SHORT).show();
 
 	}
 

@@ -23,7 +23,7 @@ public class URIMethod {
 
 	  URL url = new URL("http://www.tgju.org/coin");
 	  URLConnection urlConnection = url.openConnection();
-	  urlConnection.setConnectTimeout(15 * 1000);
+	  urlConnection.setConnectTimeout(8 * 1000);
 
 	  DataInputStream dis = new DataInputStream(urlConnection.getInputStream());
 	  WriteToFile.Write("data recv");

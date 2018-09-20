@@ -26,8 +26,9 @@ public class MyService extends Service {
 
 	  final Context test = this;
 	  final int interval;
-	  interval = intent.getIntExtra("interval", 0);
-	  WriteToFile.Write("interval in service" + Integer.toString(interval));
+	  //interval = intent.getIntExtra("interval", 0);
+	  //WriteToFile.Write("interval in service" + Integer.toString(interval));
+	   WriteToFile.Write("start of service");
 
 	  final Handler handler = new Handler();
 	  Runnable r = new Runnable() {
@@ -73,7 +74,11 @@ public class MyService extends Service {
 	public void onDestroy() {
 
 		//Log.i(TAG, "onCreate() , service stopped...");
-		super.onDestroy();
+		//super.onDestroy();
+		//stopService(new Intent(getBaseContext(), MyService.class));
+		stopSelf();
+		Toast.makeText(this, "on destroy", Toast.LENGTH_SHORT);
+
 		//distroy = 1;
 
 		//WriteToFile.Write("service is stoped");
