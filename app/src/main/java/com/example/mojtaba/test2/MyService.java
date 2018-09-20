@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 public class MyService extends Service {
 	int distroy = 0;
+	Handler handler;
+	Runnable r;
+	int running = 1;
    @Nullable
    @Override
    public IBinder onBind(Intent intent) {
@@ -30,8 +33,8 @@ public class MyService extends Service {
 	  //WriteToFile.Write("interval in service" + Integer.toString(interval));
 	   WriteToFile.Write("start of service");
 
-	  final Handler handler = new Handler();
-	  Runnable r = new Runnable() {
+	  handler = new Handler();
+	  r = new Runnable() {
 		  @Override
 		  public void run() {
 			  try {
@@ -59,7 +62,7 @@ public class MyService extends Service {
 
 			  }
 
-
+					if(running == 1)
 				  handler.postDelayed(this, 10 * 1000);
 
 		  }
@@ -76,12 +79,15 @@ public class MyService extends Service {
 		//Log.i(TAG, "onCreate() , service stopped...");
 		//super.onDestroy();
 		//stopService(new Intent(getBaseContext(), MyService.class));
-		stopSelf();
-		Toast.makeText(this, "on destroy", Toast.LENGTH_SHORT);
+		//stopSelf();
+		//Toast.makeText(this, "on destroy", Toast.LENGTH_SHORT);
 
 		//distroy = 1;
+		handler.removeCallbacks(r);
+		running = 0;
 
-		//WriteToFile.Write("service is stoped");
+
+		WriteToFile.Write("service is stoped");
 
 	}
 }
