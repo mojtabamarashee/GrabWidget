@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -28,7 +29,6 @@ public class MyService extends Service {
       //Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
 
 	  final Context test = this;
-	  final int interval;
 	  //interval = intent.getIntExtra("interval", 0);
 	  //WriteToFile.Write("interval in service" + Integer.toString(interval));
 	   WriteToFile.Write("start of service");
@@ -37,13 +37,15 @@ public class MyService extends Service {
 	  r = new Runnable() {
 		  @Override
 		  public void run() {
+			  int interval = 10;
 			  try {
+
+				  SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+				  interval = prefs.getInt("interval", 10);
 
 				  Intent intent = new Intent(test, NewAppWidget.class);
 				  intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
 				  
-				  // Use an array and EXTRA_APPWIDGET_IDS instead of AppWidgetManager.EXTRA_APPWIDGET_ID,
-				  // since it seems the onUpdate() is only fired on that:
 
 				  int[] ids = AppWidgetManager.getInstance(getApplication())
 					  .getAppWidgetIds(new ComponentName(getApplication(), NewAppWidget.class));
@@ -62,8 +64,8 @@ public class MyService extends Service {
 
 			  }
 
-					if(running == 1)
-				  handler.postDelayed(this, 10 * 1000);
+					//if(running == 1)
+			  handler.postDelayed(this, interval * 1000);
 
 		  }
 	  };
@@ -90,5 +92,5 @@ public class MyService extends Service {
 		WriteToFile.Write("service is stoped");
 
 	}
-	
+
 }

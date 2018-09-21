@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
@@ -18,10 +19,18 @@ public class MainActivity extends AppCompatActivity {
 
 	int interval = 10;
 	Intent serviceIntent;
+	SharedPreferences.Editor editor;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		SharedPreferences pref = getApplicationContext().getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+		editor = pref.edit();
 		setContentView(R.layout.activity_main);
+		editor.putInt("interval", 10);
+		editor.apply();
 
 
 		final EditText field1 = (EditText)findViewById(R.id.interval);
@@ -32,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
 			public void afterTextChanged(Editable s) {
 				WriteToFile.Write("after change" + (field1.getText()));
 				interval = Integer.parseInt(field1.getText().toString());
-				StopService();
+				editor.putInt("interval", interval);
+				editor.apply();
 
 			}
 
