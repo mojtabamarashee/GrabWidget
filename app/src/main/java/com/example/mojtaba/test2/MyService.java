@@ -90,4 +90,5 @@ public class MyService extends Service {
 		WriteToFile.Write("service is stoped");
 
 	}
+	
 }
