@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-	int interval = 1;
+	int interval;
 	Intent serviceIntent;
 	SharedPreferences.Editor editor;
 
@@ -30,15 +30,35 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 
 		SharedPreferences pref = getApplicationContext().getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
-		editor = pref.edit();
 		setContentView(R.layout.activity_main);
-		editor.putInt("interval", 60);
-		editor.apply();
+		editor = pref.edit();
+
+		try {
+			interval = pref.getInt("interval", 60);
+		}
+		catch(Exception e){
+			editor.putInt("interval", 60);
+			interval = 60;
+			editor.apply();
+		}
+
 
 
 
 		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-		radioGroup.clearCheck();
+
+		if(interval == 10)
+			radioGroup.check(R.id.sec10);
+		if(interval == 60)
+			radioGroup.check(R.id.min1);
+		if(interval == 5 * 60)
+			radioGroup.check(R.id.min5);
+		if(interval == 15*60)
+			radioGroup.check(R.id.min15);
+		if(interval ==30*60)
+			radioGroup.check(R.id.min30);
+		if(interval == 60*60)
+			radioGroup.check(R.id.hour1);
 
 		radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			@Override
