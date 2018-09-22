@@ -49,35 +49,15 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start,
 										  int count, int after) {
-				//WriteToFile.Write("beforeChange"+ field1.getText());
 			}
 
 			@Override
 			public void onTextChanged(CharSequence s, int start,
 									  int before, int count) {
-				//WriteToFile.Write("onChange"+ field1.getText());
 			}
 		});
 
-
-
-
-		Intent intent = new Intent(this, NewAppWidget.class);
-		intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-		// Use an array and EXTRA_APPWIDGET_IDS instead of AppWidgetManager.EXTRA_APPWIDGET_ID,
-		// since it seems the onUpdate() is only fired on that:
-		int[] ids = AppWidgetManager.getInstance(getApplication())
-				.getAppWidgetIds(new ComponentName(getApplication(), NewAppWidget.class));
-		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-		sendBroadcast(intent);
-
-		//StopService();
-
-		if (false/*isMyServiceRunning(MyService.class)*/) {
-
-		} else {
-			StartService();
-		}
+		StartService();
 	}
 
 	public void StartService() {

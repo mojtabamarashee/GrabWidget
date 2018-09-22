@@ -33,7 +33,6 @@ public class URIMethod {
 
 	  String html = getStringFromInputStream(dis);
 
-	  WriteToFile.Write("before close");
 
 
 		  dis.close();
@@ -47,7 +46,6 @@ public class URIMethod {
 	  //Pattern p = Pattern.compile("<title>(.*?)</title>");
 	  Pattern p1 = Pattern.compile("<th>سکهامامی</th><td>(\\d{8})</td>");
 	  Matcher m = p1.matcher(html);
-	  WriteToFile.Write("before pattern match");
 
 	  while (m.find() == true) {
 
@@ -87,7 +85,6 @@ public class URIMethod {
 		  break;
 	  }
 
-	  WriteToFile.Write("before exit");
 
 
 

@@ -55,8 +55,7 @@ public class Title extends AsyncTask<Void, Void, Void> {
             date = strDate;
 
             //Document document = Jsoup.connect("http://www.tgju.org/coin").timeout(20 * 1000).get();
-            WriteToFile.Write("in Runnable after jsoup");
-            WriteToFile.Write("in Runnable after2");
+            WriteToFile.Write("in doInBackground");
 
 
             ////title= a.select("body > main > div+ div  table> tbody > tr + tr >th").get(0).text();
@@ -76,27 +75,13 @@ public class Title extends AsyncTask<Void, Void, Void> {
             title3 += out[2];
             title4 += out[3];
 
-
-
-
-
-
-
-            WriteToFile.Write("in Runnable after6");
-
-
-
-            //title += Integer.toString(cntr);
-            WriteToFile.Write("in Runnable after7");
-
             cntr = cntr + 1;
-            WriteToFile.Write("in Runnable at End");
             error = 0;
 
         } catch (Exception e) {
             // title="error !";
             //title2="error !";
-            WriteToFile.Write("in Runnable at Error");
+            WriteToFile.Write("in Title at Error");
             error = 1;
         }
 
