@@ -30,6 +30,14 @@
 				android:layout_height="wrap_content"
 				android:text="Update interval?"
 				/>
+
+		<RadioButton
+			android:id="@+id/sec10"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="10 sec"
+			android:paddingRight="15dp"
+			/>
 			<RadioButton
 				android:id="@+id/min1"
 				android:layout_width="wrap_content"

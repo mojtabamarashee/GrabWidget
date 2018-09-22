@@ -46,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
 				RadioButton rb = (RadioButton) group.findViewById(checkedId);
 				if (null != rb) {
 					Toast.makeText(MainActivity.this, rb.getText(), Toast.LENGTH_SHORT).show();
+
+					if(rb.getText().equals("10 sec")) {
+						interval = 10;
+					}
 					if(rb.getText().equals("1 min")) {
                             interval = 60;
                     }
