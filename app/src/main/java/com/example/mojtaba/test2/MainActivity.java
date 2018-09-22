@@ -12,12 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ViewDebug;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-	int interval = 10;
+	int interval = 1;
 	Intent serviceIntent;
 	SharedPreferences.Editor editor;
 
@@ -29,11 +32,49 @@ public class MainActivity extends AppCompatActivity {
 		SharedPreferences pref = getApplicationContext().getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
 		editor = pref.edit();
 		setContentView(R.layout.activity_main);
-		editor.putInt("interval", 10);
+		editor.putInt("interval", 60);
 		editor.apply();
 
 
-		final EditText field1 = (EditText)findViewById(R.id.interval);
+
+		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+		radioGroup.clearCheck();
+
+		radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				RadioButton rb = (RadioButton) group.findViewById(checkedId);
+				if (null != rb) {
+					Toast.makeText(MainActivity.this, rb.getText(), Toast.LENGTH_SHORT).show();
+					if(rb.getText().equals("1 min")) {
+                            interval = 60;
+                    }
+                    if(rb.getText().equals("5 min")) {
+                        interval = 5 * 60;
+                    }
+
+                    if(rb.getText().equals("15 min")) {
+                        interval = 15 * 60;
+                    }
+
+                    if(rb.getText().equals("30 min")) {
+                        interval = 30 * 60;
+                    }
+                    if(rb.getText().equals("1 hour")) {
+                        interval = 60 * 60;
+                    }
+
+                    WriteToFile.Write("after change" + (interval));
+                    editor.putInt("interval", interval);
+                    editor.apply();
+					StartService();
+
+				}
+
+			}
+		});
+
+		/*final EditText field1 = (EditText)findViewById(R.id.interval);
 
 		field1.addTextChangedListener(new TextWatcher() {
 
@@ -55,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 			public void onTextChanged(CharSequence s, int start,
 									  int before, int count) {
 			}
-		});
+		});*/
 
 		StartService();
 	}

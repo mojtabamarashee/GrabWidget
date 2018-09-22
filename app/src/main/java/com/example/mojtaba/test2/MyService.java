@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.view.ViewDebug;
 import android.widget.Toast;
 
 public class MyService extends Service {
@@ -37,11 +38,13 @@ public class MyService extends Service {
 	  r = new Runnable() {
 		  @Override
 		  public void run() {
-			  int interval = 10;
+			  int interval = 1;
 			  try {
 
 				  SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
-				  interval = prefs.getInt("interval", 10);
+				  interval = prefs.getInt("interval", 1);
+				  //Toast.makeText(NewAppWidget.getAppContext(), Integer.toString(interval), Toast.LENGTH_SHORT).show();
+
 
 				  Intent intent = new Intent(test, NewAppWidget.class);
 				  intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -59,7 +62,7 @@ public class MyService extends Service {
 
 			  catch (Exception e) {
 				  String title = "service error : " + e.getMessage();
-				  Toast.makeText(NewAppWidget.getAppContext(), title, Toast.LENGTH_SHORT).show();
+				  //Toast.makeText(NewAppWidget.getAppContext(), title, Toast.LENGTH_SHORT).show();
 				  WriteToFile.Write(title);
 
 			  }
