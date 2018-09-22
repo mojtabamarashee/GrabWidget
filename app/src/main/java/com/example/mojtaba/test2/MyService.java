@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class MyService extends Service {
 	int distroy = 0;
-	Handler handler;
+	Handler handler = new Handler();
 	Runnable r;
 	int running = 1;
    @Nullable
@@ -33,7 +33,7 @@ public class MyService extends Service {
 	  //WriteToFile.Write("interval in service" + Integer.toString(interval));
 	   WriteToFile.Write("start of service");
 
-	  handler = new Handler();
+	  handler.removeCallbacksAndMessages(null);
 	  r = new Runnable() {
 		  @Override
 		  public void run() {
