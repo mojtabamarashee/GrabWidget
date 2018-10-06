@@ -40,6 +40,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 			@Override
 			public void run() {
 				String title = "loading";
+				
 				try{
 
 					//Toast.makeText(contextt, "onRunnable", Toast.LENGTH_LONG).show();
