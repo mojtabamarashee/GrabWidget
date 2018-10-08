@@ -20,12 +20,13 @@ public class Alarm
         int[] ids = AppWidgetManager.getInstance(context)
                 .getAppWidgetIds(new ComponentName(context, NewAppWidget.class));
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        intent.putExtra("interval", interval);
 
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
 
         //am.cancel(pi);
         WriteToFile.Write("interval in setAram = " + Integer.toString(interval));
-        am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10 * 1000, pi);
+        am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + interval * 1000, pi);
     }
 
     public void cancelAlarm(Context context)

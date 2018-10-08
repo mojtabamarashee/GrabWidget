@@ -89,7 +89,7 @@ public class NewAppWidget extends AppWidgetProvider {
 		NewAppWidget.context = context;
 		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 		pauseFlag = 0;
-		Alarm.setAlarm(context, 100);
+		Alarm.setAlarm(context, 10);
 
 	}
 
@@ -160,13 +160,16 @@ public class NewAppWidget extends AppWidgetProvider {
 		if ("WIDGET_UPDATE".equals(intent.getAction())) {
 
 			WriteToFile.Write("in rec");
+			int interval = intent.getIntExtra("interval", -1);
+
 
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 
 			WriteToFile.Write("before setalram");
 
 
-			Alarm.setAlarm(context, 20 * 1000);
+			//if(interval != 0)
+			Alarm.setAlarm(context, interval);
 			WriteToFile.Write("after setalram");
 
 

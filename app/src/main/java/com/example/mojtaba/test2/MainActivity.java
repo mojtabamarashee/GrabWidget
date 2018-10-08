@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
                     editor.putInt("interval", interval);
                     editor.apply();
 					//StartService();
+					//Alarm.setAlarm(NewAppWidget.context, 0);
+					Alarm.setAlarm(NewAppWidget.context, interval);
 
 				}
 
