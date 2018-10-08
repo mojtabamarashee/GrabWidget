@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     WriteToFile.Write("after change" + (interval));
                     editor.putInt("interval", interval);
                     editor.apply();
-					StartService();
+					//StartService();
 
 				}
 
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});*/
 
-		StartService();
+		//StartService();
 	}
 
 	public void StartService() {

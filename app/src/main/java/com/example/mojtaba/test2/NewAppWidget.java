@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.os.AsyncTask;
@@ -88,6 +89,8 @@ public class NewAppWidget extends AppWidgetProvider {
 		NewAppWidget.context = context;
 		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 		pauseFlag = 0;
+		Alarm.setAlarm(context, 100);
+
 	}
 
 
@@ -96,6 +99,21 @@ public class NewAppWidget extends AppWidgetProvider {
 	public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
 		super.onReceive(context, intent);
+		int[] appWidgetIds = {0};
+		try{
+			//Bundle extras = intent.getExtras();
+			//appWidgetIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_ID);
+			//WriteToFile.Write("appWidgetIds = " + appWidgetIds[0]);
+
+			appWidgetIds = AppWidgetManager.getInstance(context)
+					.getAppWidgetIds(new ComponentName(context, NewAppWidget.class));
+			WriteToFile.Write("appWidgetIds = " + appWidgetIds[0]);
+		}
+		catch(Exception e){
+			WriteToFile.Write("error");
+		}
+
+
 
 		if (ACTION_WIDGET_CLICK.equals(intent.getAction())) {
 
@@ -107,14 +125,12 @@ public class NewAppWidget extends AppWidgetProvider {
 
 			watchWidget = new ComponentName(context, NewAppWidget.class);
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-			if(pauseFlag == 0) {
+			if (pauseFlag == 0) {
 				//pauseFlag = 1;
 				TogglePauseFlag();
 				Toast.makeText(context, "Pause", Toast.LENGTH_LONG).show();
 				views.setImageViewResource(R.id.pause_12, R.drawable.play_30);
-			}
-			else
-			{
+			} else {
 				//pauseFlag = 0;
 				TogglePauseFlag();
 				Toast.makeText(context, "Play", Toast.LENGTH_LONG).show();
@@ -139,6 +155,20 @@ public class NewAppWidget extends AppWidgetProvider {
 
 
 			appWidgetManager.updateAppWidget(appWidgetId, views);
+		}
+
+		if ("WIDGET_UPDATE".equals(intent.getAction())) {
+
+			WriteToFile.Write("in rec");
+
+			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(NewAppWidget.context);
+
+
+			Alarm.setAlarm(NewAppWidget.context, 20 * 1000);
+
+			onUpdate(NewAppWidget.context, appWidgetManager, appWidgetIds);
+			//Toast.makeText(context, "onRecv", Toast.LENGTH_SHORT).show();
+
 		}
 	}
 
