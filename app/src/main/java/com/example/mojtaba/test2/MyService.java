@@ -31,8 +31,6 @@ public class MyService extends Service {
 
 	  final Context test = this;
 	  //interval = intent.getIntExtra("interval", 0);
-	  //WriteToFile.Write("interval in service" + Integer.toString(interval));
-	   WriteToFile.Write("start of service");
 
 	  handler.removeCallbacksAndMessages(null);
 	  r = new Runnable() {
@@ -54,7 +52,6 @@ public class MyService extends Service {
 					  .getAppWidgetIds(new ComponentName(getApplication(), NewAppWidget.class));
 				  intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 				  sendBroadcast(intent);
-				  WriteToFile.Write("service run");
 				  //Toast.makeText(NewAppWidget.getAppContext(), "service run", Toast.LENGTH_SHORT).show();
 
 

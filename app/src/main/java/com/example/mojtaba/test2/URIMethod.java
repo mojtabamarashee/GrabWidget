@@ -49,7 +49,6 @@ public class URIMethod {
 
 	  while (m.find() == true) {
 
-		  WriteToFile.Write("find pattern");
 		  out[0] = m.group(1);
 		  break;
 	  }
@@ -59,18 +58,15 @@ public class URIMethod {
 
 	  while (m.find() == true) {
 
-		  WriteToFile.Write("find pattern");
 		  out[1] = m.group(1);
 		  break;
 	  }
 
 	  p1 = Pattern.compile("<th>ربعسکه</th><td>(\\d{8})</td>");
 	  m = p1.matcher(html);
-	  WriteToFile.Write("before pattern match");
 
 	  while (m.find() == true) {
 
-		  WriteToFile.Write("find pattern");
 		  out[2] = m.group(1);
 		  break;
 	  }
@@ -80,7 +76,6 @@ public class URIMethod {
 
 	  while (m.find() == true) {
 
-		  WriteToFile.Write("find pattern");
 		  out[3] = m.group(1);
 		  break;
 	  }

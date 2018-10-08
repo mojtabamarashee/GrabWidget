@@ -53,7 +53,7 @@ public class NewAppWidget extends AppWidgetProvider {
 				String title = "loading";
 				try {
 
-					WriteToFile.Write("onRuunable");
+					//WriteToFile.Write("onRuunable");
 					Log.d("test", Integer.toString(pauseFlag));
 					if(pauseFlag == 0) {
 						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -107,7 +107,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
 			appWidgetIds = AppWidgetManager.getInstance(context)
 					.getAppWidgetIds(new ComponentName(context, NewAppWidget.class));
-			WriteToFile.Write("appWidgetIds = " + appWidgetIds[0]);
+			//WriteToFile.Write("appWidgetIds = " + appWidgetIds[0]);
 		}
 		catch(Exception e){
 			WriteToFile.Write("error");
@@ -162,21 +162,26 @@ public class NewAppWidget extends AppWidgetProvider {
 			WriteToFile.Write("in rec");
 			int interval = intent.getIntExtra("interval", -1);
 
-
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 
-			WriteToFile.Write("before setalram");
-
-
-			//if(interval != 0)
 			Alarm.setAlarm(context, interval);
-			WriteToFile.Write("after setalram");
-
 
 			onUpdate(context, appWidgetManager, appWidgetIds);
 			//Toast.makeText(context, "onRecv", Toast.LENGTH_SHORT).show();
 
 		}
+	}
+
+	public void UpdateWidget(Contex context){
+
+		int[] appWidgetIds ;
+
+		appWidgetIds = AppWidgetManager.getInstance(context)
+			.getAppWidgetIds(new ComponentName(context, NewAppWidget.class));
+
+		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+
+		onUpdate(context, appWidgetManager, appWidgetIds);
 	}
 
 

@@ -21,6 +21,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
 	int interval;
+	String method;
 	Intent serviceIntent;
 	SharedPreferences.Editor editor;
 
@@ -34,16 +35,24 @@ public class MainActivity extends AppCompatActivity {
 		editor = pref.edit();
 
 		try {
+
 			interval = pref.getInt("interval", 60);
+			method = pref.getString("method", "alarm");
+			WriteToFile.Write("method in preSaved file" + method);
+			WriteToFile.Write("interval in preSaved file" + interval);
+
 		}
 		catch(Exception e){
+
+			WriteToFile.Write("preSaved file Does Not Exit");
 			editor.putInt("interval", 60);
 			interval = 60;
 			editor.apply();
+
+			editor.putString("method", "alarm");
+			method = "alarm";
+			editor.apply();
 		}
-
-
-
 
 		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
@@ -91,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
                     WriteToFile.Write("after change" + (interval));
                     editor.putInt("interval", interval);
                     editor.apply();
+                    WriteToFile.Write("before manual update");
+					NewAppWidget.UpdateWidget(NewAppWidget.context);
+                    WriteToFile.Write("after manual update");
+					NewAppWidget.UpdateWidget(NewAppWidget.context);
 					//StartService();
 					//Alarm.setAlarm(NewAppWidget.context, 0);
 					Alarm.setAlarm(NewAppWidget.context, interval);
@@ -99,30 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
 			}
 		});
-
-		/*final EditText field1 = (EditText)findViewById(R.id.interval);
-
-		field1.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				WriteToFile.Write("after change" + (field1.getText()));
-				interval = Integer.parseInt(field1.getText().toString());
-				editor.putInt("interval", interval);
-				editor.apply();
-
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start,
-										  int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start,
-									  int before, int count) {
-			}
-		});*/
 
 		//StartService();
 	}

@@ -44,7 +44,6 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 				try{
 
 					//Toast.makeText(contextt, "onRunnable", Toast.LENGTH_LONG).show();
-					WriteToFile.Write("onRuunable");
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 						new Title(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					}
@@ -59,7 +58,6 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
 				catch(Exception e)
 				{
-					//WriteToFile("run Exeption");
 					title="error : " + e.getMessage()+ "title :"  + title;
 					Toast.makeText(contextt, title, Toast.LENGTH_LONG).show();
 					WriteToFile.Write(title);
