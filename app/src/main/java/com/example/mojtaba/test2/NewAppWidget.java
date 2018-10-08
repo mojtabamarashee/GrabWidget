@@ -161,12 +161,16 @@ public class NewAppWidget extends AppWidgetProvider {
 
 			WriteToFile.Write("in rec");
 
-			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(NewAppWidget.context);
+			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+
+			WriteToFile.Write("before setalram");
 
 
-			Alarm.setAlarm(NewAppWidget.context, 20 * 1000);
+			Alarm.setAlarm(context, 20 * 1000);
+			WriteToFile.Write("after setalram");
 
-			onUpdate(NewAppWidget.context, appWidgetManager, appWidgetIds);
+
+			onUpdate(context, appWidgetManager, appWidgetIds);
 			//Toast.makeText(context, "onRecv", Toast.LENGTH_SHORT).show();
 
 		}
